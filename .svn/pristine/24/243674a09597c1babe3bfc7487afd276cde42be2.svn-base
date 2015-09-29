@@ -1,0 +1,237 @@
+//
+//  GameViewController.swift
+//  brainexecise
+//
+//  Created by Petch Temeeyasen on 5/19/15.
+//  Copyright (c) 2015 meesoft. All rights reserved.
+//
+
+import WatchKit
+import Foundation
+
+
+class GameViewController: WKInterfaceController {
+    var gameSetting: GameSetting!
+    var trueSide: Int = 0
+    var score: Int = 0
+    var incorrect: Int = 0
+    
+    var button1Title: String!
+    var button2Title: String!
+    
+    var countDown = 3;
+    var countDownTimer: NSTimer!
+    var isGameOver: Bool = false
+    
+    @IBOutlet weak var scoreLabel: WKInterfaceLabel!
+    @IBOutlet weak var incorrectLabel: WKInterfaceLabel!
+    @IBOutlet weak var statusLabel: WKInterfaceLabel!
+    @IBOutlet weak var gameNameLabel: WKInterfaceLabel!
+    @IBOutlet weak var questionLabel: WKInterfaceLabel!
+    
+    @IBOutlet weak var countdownLabel: WKInterfaceTimer!
+    @IBOutlet weak var answer1Button: WKInterfaceButton!
+    @IBOutlet weak var answer2Button: WKInterfaceButton!
+
+    
+    override func awakeWithContext(context: AnyObject?) {
+        super.awakeWithContext(context)
+        
+        if let setting = context as? GameSetting {
+            gameSetting = setting;
+            switch(setting.gameMode){
+            case 0:
+                self.gameNameLabel.setText(String(format: "Cal Game Level %d", setting.level))
+                break
+            case 1:
+                self.gameNameLabel.setText(String(format: "True/False Game Level %d", setting.level))
+                break
+            case 2:
+                self.gameNameLabel.setText(String(format: "Operation Game Level %d", setting.level))
+                break
+            default:
+                self.gameNameLabel.setText("")
+            }
+            incorrectLabel.setAlpha(0.0)
+            statusLabel.setText("")
+            answer1Button.setTitle("")
+            answer2Button.setTitle("")
+            // set countdown label.
+            var date = NSDate(timeIntervalSinceNow: 31)
+            countdownLabel.setDate(date)
+
+            countDownTimer = NSTimer.scheduledTimerWithTimeInterval(1.0,
+                target: self,
+                selector: Selector("countdown"),
+                userInfo: nil,
+                repeats: true)
+            //getQuestion()
+        }
+    }
+    
+    override func willActivate() {
+        // This method is called when watch view controller is about to be visible to user
+        super.willActivate()
+    }
+    
+    override func didDeactivate() {
+        // This method is called when watch view controller is no longer visible
+        super.didDeactivate()
+    }
+    
+    @IBAction func answer1Click() {
+        updateScore(trueSide == 0)
+    }
+    
+    @IBAction func answer2Click() {
+        updateScore(trueSide == 1)
+    }
+    
+    func updateScore(correct: Bool){
+        if correct {
+            statusLabel.setText("+1")
+            score++
+            scoreLabel.setText(String(format: "Score: %d", score))
+        }
+        else {
+            incorrectLabel.setAlpha(1.0)
+            statusLabel.setTextColor(UIColor.redColor())
+            statusLabel.setText("-1")
+            incorrect++
+            incorrectLabel.setText(String(format: "X: %d", incorrect))
+
+        }
+        NSTimer.scheduledTimerWithTimeInterval(0.5,
+            target: self,
+            selector: Selector("clearStat"),
+            userInfo: nil,
+            repeats: false)
+        answer1Button.setEnabled(false)
+        answer2Button.setEnabled(false)
+        if !isGameOver {
+            getQuestion()
+        }
+    }
+    
+    func clearStat() {
+        statusLabel.setTextColor(UIColor.whiteColor())
+        statusLabel.setText("")
+    }
+    
+    func countdown() {
+        if countDown == 0 {
+            // invalidate and stop timer.
+            countDownTimer.invalidate()
+            countDownTimer = nil
+            var date = NSDate(timeIntervalSinceNow: 31)
+            countdownLabel.setDate(date)
+            countdownLabel.start()
+            NSTimer.scheduledTimerWithTimeInterval(30.0,
+                target: self,
+                selector: Selector("gameOver"),
+                userInfo: nil,
+                repeats: false)
+            getQuestion()
+        }
+        else {
+            questionLabel.setText(String(format:"%d", countDown))
+            countDown--
+        }
+    }
+    
+    func gameOver(){
+        isGameOver = true
+        answer1Button.setEnabled(false)
+        answer2Button.setEnabled(false)
+        
+        questionLabel.setText("Game Over")
+        
+        NSTimer.scheduledTimerWithTimeInterval(3.0,
+            target: self,
+            selector: Selector("goToSummaryPage"),
+            userInfo: nil,
+            repeats: false)
+    }
+    
+    func goToSummaryPage(){
+        let scoreCard = GameScore(score : score, incorrect: incorrect, level : gameSetting.level)
+        pushControllerWithName("Summary",context: scoreCard)
+    }
+    
+    func getQuestion() {
+        if gameSetting.gameMode == 0 {
+            
+            trueSide = randomNumberBetween(0, max: 1)
+            var mode: Int = 0
+            if(gameSetting.level == 2) { // + , -
+                mode = randomNumberBetween(0, max: 1)//arc4random_uniform(1)
+            }
+            else if(gameSetting.level == 3) { // +,-,x
+                mode = randomNumberBetween(0, max: 2)//arc4random_uniform(2)
+            }
+            let rand1: Int = (mode != 1) ? randomNumberBetween(0, max: 9) : randomNumberBetween(1, max: 1)//arc4random_uniform(9) + 1
+            let rand2: Int = (mode != 1) ? randomNumberBetween(0, max: 9)  : randomNumberBetween(0, max: 1) + rand1
+            
+            let eventOdd = randomNumberBetween(0, max: 1)// arc4random_uniform(1)
+            
+            let answer = (mode == 0) ? rand1 + rand2 : (mode == 1) ? rand1 - rand2 : rand1 * rand2
+            
+            var lue = answer
+            if eventOdd == 0 {
+                switch(mode){
+                case 1 : // -
+                    lue = answer - 2
+                    break
+                case 2 : // x
+                    lue = answer + (rand2 * 3)
+                    break
+                default : // +
+                    lue = answer + (rand2 * 2)
+                    break
+                }
+            }
+            else {
+                switch(mode){
+                case 1 : // -
+                    lue = answer - 1
+                    break
+                case 2 : // x
+                    lue = answer - (rand2 * 1)
+                    break
+                default : // +
+                    lue = answer + (rand2 * 1)
+                    break
+                }
+            }
+            // worst case answer = lue
+            if answer == lue {
+                lue = answer - 1
+            }
+            
+            questionLabel.setText(String(format: "%d %@ %d = ?", rand1, (mode==0) ? "+" : (mode==1) ? "-" : "X", rand2))
+            
+            if trueSide == 0 {
+                button1Title = String(format: "%d", answer)
+                button2Title = String(format: "%d", lue)
+                
+            }
+            else {
+                button1Title = String(format: "%d", lue)
+                button2Title = String(format: "%d", answer)
+            }
+            answer1Button.setTitle(button1Title)
+            answer2Button.setTitle(button2Title)
+        }
+        else if gameSetting.gameMode == 1 {
+        }
+        else if gameSetting.gameMode == 2 {
+        }
+        
+        answer1Button.setEnabled(true)
+        answer2Button.setEnabled(true)
+    }
+    
+    func randomNumberBetween(min: Int, max: Int) -> Int {
+        return Int(arc4random_uniform(UInt32(max - min + 1))) + min
+    }
+}

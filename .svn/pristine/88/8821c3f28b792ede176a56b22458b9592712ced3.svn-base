@@ -1,0 +1,89 @@
+//
+//  ViewController.swift
+//  brainexecise
+//
+//  Created by Petch Temeeyasen on 5/19/15.
+//  Copyright (c) 2015 meesoft. All rights reserved.
+//
+
+import UIKit
+
+class ViewController: UIViewController {
+    @IBOutlet weak var statusLabel: UILabel!
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let userSetting: NSUserDefaults! = NSUserDefaults(suiteName: "group.brainexecise")
+        
+        if let isFirstTimeDone = userSetting.boolForKey("isdonefirsttime") as Bool? {
+            if !isFirstTimeDone {
+                userSetting.setBool(true, forKey: "isdonefirsttime")
+                userSetting.setBool(false, forKey: "ispurchased")
+                userSetting.setBool(false, forKey: "ispurchased2")
+                userSetting.setBool(false, forKey: "iswatchscore")
+                userSetting.setObject("Beginner", forKey: "rank")
+                userSetting.setInteger(1, forKey: "level")
+                userSetting.setInteger(0, forKey: "rankprogress")
+                userSetting.setInteger(3, forKey: "maxprogress")
+                
+                userSetting.setBool(false, forKey: "practicemode")
+                
+                userSetting.setInteger(0, forKey: "dailyplay")
+                userSetting.setInteger(0, forKey: "game1play")
+                userSetting.setInteger(0, forKey: "game2play")
+                userSetting.setInteger(0, forKey: "game3play")
+                userSetting.setInteger(0, forKey: "game4play")
+                userSetting.setInteger(0, forKey: "game5play")
+                
+                userSetting.setBool(false, forKey: "game1unlock")
+                userSetting.setBool(false, forKey: "game2unlock")
+                userSetting.setBool(false, forKey: "game3unlock")
+                userSetting.setBool(false, forKey: "game4unlock")
+                userSetting.setBool(false, forKey: "game5unlock")
+                
+                userSetting.setInteger(10, forKey: "hiscore")
+                userSetting.setInteger(1, forKey: "topgame")
+                userSetting.setInteger(0, forKey: "hiscore1")
+                userSetting.setInteger(0, forKey: "hiscore2")
+                userSetting.setInteger(0, forKey: "hiscore3")
+                userSetting.setInteger(0, forKey: "todayscore")
+                
+                let lastestDate: NSDate = NSDate(timeIntervalSince1970: 0)
+
+                userSetting.setObject(lastestDate, forKey: "lastdate")
+                
+                userSetting.setObject([10, 10, 10], forKey: "scoresgame1") // top 3 hiscore of speed cal game for practise mode.
+                userSetting.setObject([10, 10, 10], forKey: "scoresgame2")
+                userSetting.setObject([10, 10, 10], forKey: "scoresgame3")
+                //userSetting.synchronize()
+            }
+            
+            if let isPurchase = userSetting.boolForKey("ispurchased") as Bool? {
+                statusLabel.text = isPurchase ? "Purchased" : "Free Version"
+                //puchaseSwitch.setOn(isPurchase, animated: true)
+            }
+            
+            if let isPurchase = userSetting.boolForKey("ispurchased2") as Bool? {
+                statusLabel.text = isPurchase ? "Purchased 2" : "Free Version"
+                //puchaseSwitch.setOn(isPurchase, animated: true)
+            }
+            
+            if let lastDate = userSetting.objectForKey("lastdate") as? NSDate {
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd" // superset of OP's format
+                let str = dateFormatter.stringFromDate(lastDate)
+                
+                statusLabel.text = "since:" + str
+
+            }
+        }
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
+}
+

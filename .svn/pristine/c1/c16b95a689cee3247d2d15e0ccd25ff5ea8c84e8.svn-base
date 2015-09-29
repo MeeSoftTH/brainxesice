@@ -1,0 +1,80 @@
+//
+//  ViewController.swift
+//  brainexecise
+//
+//  Created by Petch Temeeyasen on 5/19/15.
+//  Copyright (c) 2015 meesoft. All rights reserved.
+//
+
+import UIKit
+
+class ViewController: UIViewController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let userSetting: NSUserDefaults! = NSUserDefaults(suiteName: "group.brainexecise")
+        
+        if let isFirstTimeDone = userSetting.boolForKey("isdonefirsttime") as Bool? {
+            if !isFirstTimeDone {
+                userSetting.setBool(true, forKey: "isdonefirsttime")
+                userSetting.setBool(false, forKey: "ispurchased")
+                userSetting.setObject("beginner", forKey: "rank")
+                userSetting.setInteger(0, forKey: "rankprogress")
+                
+                userSetting.setBool(false, forKey: "practicemode")
+                
+                userSetting.setBool(false, forKey: "isgame1played")
+                userSetting.setBool(false, forKey: "isgame2played")
+                userSetting.setBool(false, forKey: "isgame3played")
+                userSetting.setBool(false, forKey: "isgame4played")
+                userSetting.setBool(false, forKey: "isgame5played")
+                
+                userSetting.setInteger(10, forKey: "totalhiscore")
+                userSetting.setInteger(0, forKey: "todayscore")
+                
+                let lastestDate: NSDate = NSDate(timeIntervalSince1970: 0)
+
+                userSetting.setObject(lastestDate, forKey: "lastdate")
+                
+                userSetting.setObject([10, 10, 10], forKey: "hiscoresgame1") // top 3 hiscore of speed cal game for practise mode.
+                userSetting.setObject([10, 10, 10], forKey: "hiscoresgame2")
+                userSetting.setObject([10, 10, 10], forKey: "hiscoresgame3")
+                userSetting.synchronize()
+            }
+            
+            if let isPurchase = userSetting.boolForKey("ispurchased") as Bool? {
+                statusLabel.text = isPurchase ? "Purchased" : "Free Version2"
+                puchaseSwitch.setOn(isPurchase, animated: true)
+            }
+            
+            if let lastDate = userSetting.objectForKey("lastdate") as? NSDate {
+                let dateFormatter = NSDateFormatter()
+                dateFormatter.dateFormat = "yyyy-MM-dd" // superset of OP's format
+                let str = dateFormatter.stringFromDate(lastDate)
+                
+                statusLabel.text = "since:" + str
+
+            }
+        
+        }
+        
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
+    @IBOutlet weak var statusLabel: UILabel!
+
+    @IBOutlet weak var puchaseSwitch: UISwitch!
+    
+    @IBAction func purchaseClick(sender: UISwitch) {
+        let userSetting: NSUserDefaults! = NSUserDefaults(suiteName: "group.brainexecise")
+        
+        userSetting.setBool(puchaseSwitch.on, forKey: "ispurchased")
+        userSetting.synchronize()
+    }
+}
+

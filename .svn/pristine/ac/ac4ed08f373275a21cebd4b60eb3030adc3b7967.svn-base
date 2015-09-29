@@ -1,0 +1,795 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder.WatchKit.Storyboard" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="watchKit" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="AgC-eL-Hgc">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="7701"/>
+    </dependencies>
+    <scenes>
+        <!--Progress-->
+        <scene sceneID="k7m-2x-4aS">
+            <objects>
+                <controller identifier="ProProgress" title="Progress" id="7ed-EZ-aMS" customClass="ProProgressViewController" customModule="brainexecise_WatchKit_Extension">
+                    <items>
+                        <label alignment="center" alpha="0.0" text="Progress" id="1MN-Ts-nfu">
+                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                        </label>
+                        <group width="1" widthAdjustment="-4" height="92" alignment="center" layout="vertical" id="8T1-q3-0gu">
+                            <items>
+                                <group width="1" alignment="left" id="q32-K4-w5e">
+                                    <items>
+                                        <label width="1" alignment="left" text="Professional" textAlignment="center" id="9T9-YX-aqv"/>
+                                    </items>
+                                    <color key="backgroundColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </group>
+                                <group width="134" alignment="left" verticalAlignment="center" id="1iV-E1-gOc">
+                                    <items>
+                                        <imageView width="30" height="30" alignment="center" alpha="0.20000000000000001" image="pro_badge" id="kU6-e5-B2T"/>
+                                        <imageView width="30" height="30" alignment="center" alpha="0.20000000000000001" image="pro_badge" id="6De-D6-Duc"/>
+                                        <imageView width="30" height="30" alignment="center" alpha="0.20000000000000001" image="pro_badge" id="Hpp-8M-OKz"/>
+                                        <imageView width="30" height="30" alignment="center" alpha="0.20000000000000001" image="pro_badge" id="DR4-pa-9PG"/>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="left" verticalAlignment="center" id="ZUJ-Q2-NFV">
+                                    <items>
+                                        <imageView width="30" height="30" alignment="center" alpha="0.20000000000000001" image="pro_badge" id="cQe-RO-hhw"/>
+                                        <imageView width="30" height="30" alignment="center" alpha="0.20000000000000001" image="pro_badge" id="yqj-UT-0jw"/>
+                                        <imageView width="30" height="30" alignment="center" alpha="0.20000000000000001" image="pro_badge" id="PVO-XF-xgr"/>
+                                        <imageView width="30" height="30" alignment="center" alpha="0.20000000000000001" image="pro_badge" id="BRJ-gl-Tds"/>
+                                    </items>
+                                </group>
+                            </items>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </group>
+                        <label alignment="left" verticalAlignment="bottom" text="hint: Collect 3 star." numberOfLines="2" id="m0d-9d-wVF">
+                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                        </label>
+                    </items>
+                    <connections>
+                        <outlet property="badge1" destination="kU6-e5-B2T" id="oSd-Es-PkF"/>
+                        <outlet property="badge2" destination="6De-D6-Duc" id="f9l-tW-8Jo"/>
+                        <outlet property="badge3" destination="Hpp-8M-OKz" id="Sc8-9c-rIe"/>
+                        <outlet property="badge4" destination="DR4-pa-9PG" id="s4p-zh-LVT"/>
+                        <outlet property="badge5" destination="cQe-RO-hhw" id="RLJ-v0-rfq"/>
+                        <outlet property="badge6" destination="yqj-UT-0jw" id="8e2-Sd-MiV"/>
+                        <outlet property="badge7" destination="PVO-XF-xgr" id="0n0-R2-N2S"/>
+                        <outlet property="badge8" destination="BRJ-gl-Tds" id="2iC-QC-TAU"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="1014" y="-125"/>
+        </scene>
+        <!--Interface Controller-->
+        <scene sceneID="aou-V4-d1y">
+            <objects>
+                <controller id="AgC-eL-Hgc" customClass="InterfaceController" customModule="brainexecise_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <label width="1" alignment="left" text="Select Mode" textAlignment="center" id="xwy-He-kTn"/>
+                        <button width="1" alignment="left" title="Play" id="RJ3-5M-hzm">
+                            <connections>
+                                <action selector="playClick" destination="AgC-eL-Hgc" id="AQb-Ps-Dmc"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="Practice" enabled="NO" id="E8l-ul-C2Y">
+                            <connections>
+                                <segue destination="ENh-Wb-f4D" kind="push" id="oDb-Tf-dQ4"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="Stat" id="fE2-Dk-HF3">
+                            <connections>
+                                <segue destination="RYe-NU-tOv" kind="modal" id="1TM-8C-rps"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="practiceButton" destination="E8l-ul-C2Y" id="3ys-jK-KQa"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="164" y="116"/>
+        </scene>
+        <!--Stat1-->
+        <scene sceneID="cJt-OP-y2q">
+            <objects>
+                <controller identifier="Stat1" id="RYe-NU-tOv" customClass="StatViewController" customModule="brainexecise_WatchKit_Extension">
+                    <items>
+                        <label alignment="left" text="Today's score:" id="d1d-Mm-MLr">
+                            <color key="textColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <label width="1" alignment="left" text="--" textAlignment="center" id="xQn-zY-MUU">
+                            <fontDescription key="font" type="system" pointSize="26"/>
+                        </label>
+                        <group width="1" widthAdjustment="-6" alignment="center" id="0iJ-9x-lXD">
+                            <items>
+                                <label alignment="left" text="Hi-score:" id="7rm-rm-CKy">
+                                    <color key="textColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                </label>
+                                <label alignment="right" text="--" textAlignment="center" id="PXe-K8-k6F">
+                                    <color key="textColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group width="1" widthAdjustment="-6" alignment="center" id="Gso-aC-Tbi">
+                            <items>
+                                <label alignment="left" text="Rank:" id="eHL-n7-Pmg">
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                </label>
+                                <label alignment="right" text="Name" id="TGx-9G-k2Z">
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group width="1" widthAdjustment="-6" alignment="center" id="R3l-B1-Tw6">
+                            <items>
+                                <label alignment="left" text="Progress:" id="B1d-hs-Icf">
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                </label>
+                                <label alignment="right" text="0/0" id="m3W-zF-5CT">
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                </label>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="hiscoreLabel" destination="PXe-K8-k6F" id="7rc-fT-ydp"/>
+                        <outlet property="progressLabel" destination="m3W-zF-5CT" id="QhW-wl-ucy"/>
+                        <outlet property="rankLabel" destination="TGx-9G-k2Z" id="m9Q-6n-CiZ"/>
+                        <outlet property="todayLabel" destination="xQn-zY-MUU" id="Xh4-AJ-6d7"/>
+                        <segue destination="WDD-kg-BNt" kind="relationship" relationship="nextPage" id="fTL-mN-RQy"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="398" y="436"/>
+        </scene>
+        <!--Stat2-->
+        <scene sceneID="z7J-cQ-X74">
+            <objects>
+                <controller identifier="Stat2" id="WDD-kg-BNt" customClass="StatViewController2" customModule="brainexecise_WatchKit_Extension">
+                    <items>
+                        <label alignment="left" text="Hi-score" id="e6D-zK-2oW">
+                            <color key="textColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <group width="1" widthAdjustment="-6" alignment="center" id="fg2-0P-bku">
+                            <items>
+                                <label alignment="left" text="Speed Cal:" id="Vks-so-h9X">
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                </label>
+                                <label alignment="right" text="0" textAlignment="right" id="xC8-S0-C4D">
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group width="1" widthAdjustment="-6" alignment="center" id="8wj-Zo-Ko8">
+                            <items>
+                                <label alignment="left" text="True or False:" id="DmZ-9n-qag">
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                </label>
+                                <label alignment="right" text="0" textAlignment="right" id="hkZ-Mg-GRI">
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group width="1" widthAdjustment="-6" alignment="center" id="JjU-eH-4eB">
+                            <items>
+                                <label alignment="left" text="Operators:" id="PIc-9c-bkG">
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                </label>
+                                <label alignment="right" text="0" textAlignment="right" id="AZx-7G-wc2">
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                </label>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="operatorScoreLabel" destination="AZx-7G-wc2" id="Ru4-9q-Kr1"/>
+                        <outlet property="speedCalScoreLabel" destination="xC8-S0-C4D" id="1Ak-D5-GfB"/>
+                        <outlet property="trueOrFalseScoreLabel" destination="hkZ-Mg-GRI" id="5f7-QD-ik2"/>
+                        <segue destination="Tdi-Ow-47Y" kind="relationship" relationship="nextPage" id="sLF-oH-ZZL"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="575" y="436"/>
+        </scene>
+        <!--Stat3-->
+        <scene sceneID="6xS-yg-txe">
+            <objects>
+                <controller identifier="Stat3" id="Tdi-Ow-47Y" customClass="StatViewController3" customModule="brainexecise_WatchKit_Extension">
+                    <items>
+                        <label alignment="left" text="Play Times" id="2Ce-Ca-gxc">
+                            <color key="textColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <group width="1" widthAdjustment="-6" alignment="center" id="lNy-16-hUJ">
+                            <items>
+                                <label alignment="left" text="Total:" id="OXq-DD-8qF">
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                </label>
+                                <label alignment="right" text="0" textAlignment="right" id="2hZ-Mn-xu6">
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group width="1" widthAdjustment="-6" alignment="center" id="phN-Tp-hL0">
+                            <items>
+                                <label alignment="left" text="Daily:" id="Rkd-4N-DK4">
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                </label>
+                                <label alignment="right" text="0" textAlignment="right" id="Vun-SI-8pv">
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group width="1" widthAdjustment="-6" alignment="center" id="Oti-9z-aBp">
+                            <items>
+                                <label alignment="left" text="Speed Cal:" id="v6r-Mh-gGt">
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                </label>
+                                <label alignment="right" text="0" textAlignment="right" id="a82-gC-cFR">
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group width="1" widthAdjustment="-6" alignment="center" id="ODZ-3h-N3E">
+                            <items>
+                                <label alignment="left" text="True or False:" id="zIe-da-ZGh">
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                </label>
+                                <label alignment="right" text="0" textAlignment="right" id="LSt-i6-0FR">
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group width="1" widthAdjustment="-6" alignment="center" id="gTb-os-Gvv">
+                            <items>
+                                <label alignment="left" text="Operators:" id="1f9-Ky-rJP">
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                </label>
+                                <label alignment="right" text="0" textAlignment="right" id="i93-Vf-0Su">
+                                    <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                                </label>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="allTimeLabel" destination="2hZ-Mn-xu6" id="bEN-8d-Gep"/>
+                        <outlet property="dailyLabel" destination="Vun-SI-8pv" id="IRV-MH-HAU"/>
+                        <outlet property="operatorLabel" destination="i93-Vf-0Su" id="3SO-gA-Edn"/>
+                        <outlet property="speedCalLabel" destination="a82-gC-cFR" id="55U-O6-5PA"/>
+                        <outlet property="trueFalseLabel" destination="LSt-i6-0FR" id="pR4-yH-gT8"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="748" y="436"/>
+        </scene>
+        <!--Today View Controller-->
+        <scene sceneID="T6f-uG-mfp">
+            <objects>
+                <controller id="Aqe-TB-eJf" customClass="TodayViewController" customModule="brainexecise_WatchKit_Extension">
+                    <items>
+                        <label alignment="left" text="Today's score:" id="1mA-WI-jSU"/>
+                        <label width="134" alignment="left" text="Label" textAlignment="center" id="xr0-O4-gcj">
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <label alignment="left" text="Hi-score:" id="f2h-rc-4Ra"/>
+                        <label width="134" alignment="left" text="Label" textAlignment="center" id="kUi-hS-L4i">
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <button width="1" alignment="center" verticalAlignment="bottom" title="Start" id="LvJ-gN-09V"/>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="398" y="-356"/>
+        </scene>
+        <!--Low2High-->
+        <scene sceneID="ltj-pz-YUm">
+            <objects>
+                <controller identifier="Low2High" id="NnC-p3-ddj" customClass="LowToHiViewController" customModule="brainexecise_WatchKit_Extension">
+                    <items>
+                        <group width="1" alignment="left" id="kc9-io-hXb">
+                            <items>
+                                <label alignment="left" text="Low 2 High" id="Odz-w7-QzG"/>
+                                <label alignment="right" text="Score: 0" id="z8q-ym-9da"/>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="r8Q-O3-joW">
+                            <items>
+                                <button width="40" alignment="center" id="YN5-sR-zfP">
+                                    <connections>
+                                        <action selector="button1Click" destination="NnC-p3-ddj" id="vf2-xn-qXx"/>
+                                    </connections>
+                                </button>
+                                <button width="40" alignment="center" id="Bd2-tj-pXN">
+                                    <connections>
+                                        <action selector="button2Click" destination="NnC-p3-ddj" id="ctg-Fn-HnB"/>
+                                    </connections>
+                                </button>
+                                <button width="40" alignment="center" id="zz0-PI-L6w">
+                                    <connections>
+                                        <action selector="button3Click" destination="NnC-p3-ddj" id="0rL-9w-Z2F"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="Uzm-0w-Rng">
+                            <items>
+                                <button width="40" alignment="center" id="2q5-Bd-hxj">
+                                    <connections>
+                                        <action selector="button4Click" destination="NnC-p3-ddj" id="Ukd-S3-Tem"/>
+                                    </connections>
+                                </button>
+                                <button width="40" alignment="center" id="VIt-qw-RF0">
+                                    <connections>
+                                        <action selector="button5Click" destination="NnC-p3-ddj" id="u4o-Wo-niE"/>
+                                    </connections>
+                                </button>
+                                <button width="40" alignment="center" id="lON-Kg-Xqh">
+                                    <connections>
+                                        <action selector="button6Click" destination="NnC-p3-ddj" id="0nn-Ja-1ih"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" id="T5a-f9-tG0">
+                            <items>
+                                <button width="40" alignment="center" id="DOP-P6-fci">
+                                    <connections>
+                                        <action selector="button7Click" destination="NnC-p3-ddj" id="Gmg-K9-a3C"/>
+                                    </connections>
+                                </button>
+                                <button width="40" alignment="center" id="ZXa-Eh-v2i">
+                                    <connections>
+                                        <action selector="button8Click" destination="NnC-p3-ddj" id="mNw-7H-FRw"/>
+                                    </connections>
+                                </button>
+                                <button width="40" alignment="center" id="dga-cw-m1H">
+                                    <connections>
+                                        <action selector="button9Click" destination="NnC-p3-ddj" id="IP0-77-OlX"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="button1" destination="YN5-sR-zfP" id="KGm-fS-pzF"/>
+                        <outlet property="button2" destination="Bd2-tj-pXN" id="udS-uv-vq6"/>
+                        <outlet property="button3" destination="zz0-PI-L6w" id="SnM-dK-mDp"/>
+                        <outlet property="button4" destination="2q5-Bd-hxj" id="j6T-PO-2rN"/>
+                        <outlet property="button5" destination="VIt-qw-RF0" id="BiP-DT-XOb"/>
+                        <outlet property="button6" destination="lON-Kg-Xqh" id="Lzx-6h-be8"/>
+                        <outlet property="button7" destination="DOP-P6-fci" id="B1F-aw-Ufl"/>
+                        <outlet property="button8" destination="ZXa-Eh-v2i" id="hUT-cj-whf"/>
+                        <outlet property="button9" destination="dga-cw-m1H" id="wbY-Xa-sdb"/>
+                        <outlet property="gameLabel" destination="Odz-w7-QzG" id="Mvm-AM-WJ0"/>
+                        <outlet property="scoreLabel" destination="z8q-ym-9da" id="eCg-8X-qob"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="550" y="-125"/>
+        </scene>
+        <!--InstructionView-->
+        <scene sceneID="J4T-UW-k4D">
+            <objects>
+                <controller identifier="InstructionView" id="rAh-R1-2KA" customClass="InstructionViewController" customModule="brainexecise_WatchKit_Extension">
+                    <items>
+                        <button width="1" alignment="left" verticalAlignment="bottom" title="OK" id="auO-Fs-mWP"/>
+                        <label alignment="left" text="Game's Name" id="8Fe-2t-7ss"/>
+                        <label alignment="left" text="Instruction" id="SFZ-Rb-WmF"/>
+                    </items>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="550" y="-356"/>
+        </scene>
+        <!--DailySummary-->
+        <scene sceneID="NiC-ui-2uw">
+            <objects>
+                <controller identifier="DailySummary" id="De8-vI-CPI" customClass="DailySummaryController" customModule="brainexecise_WatchKit_Extension">
+                    <items>
+                        <label alignment="right" alpha="0.0" text="Progress Update." id="9US-VI-nfc">
+                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                        </label>
+                        <group width="1" widthAdjustment="-4" alignment="center" layout="vertical" id="jkw-hw-3g6">
+                            <items>
+                                <group width="1" alignment="left" radius="0.0" id="ToT-8G-z6H">
+                                    <items>
+                                        <label width="1" height="20" alignment="left" text="Your score" textAlignment="center" id="IXs-od-PM7">
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                        </label>
+                                    </items>
+                                    <color key="backgroundColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </group>
+                                <label width="1" alignment="left" text="SCORE" textAlignment="center" id="s09-gO-bZX">
+                                    <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="boldSystem" pointSize="26"/>
+                                </label>
+                                <label width="1" height="20" alignment="left" text="- - -" textAlignment="center" id="ee5-67-ime">
+                                    <color key="textColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                </label>
+                            </items>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </group>
+                        <group width="1" widthAdjustment="-4" alignment="center" verticalAlignment="bottom" id="wqc-sx-qtU">
+                            <items>
+                                <label width="1" alignment="left" verticalAlignment="center" text="unlock" textAlignment="center" numberOfLines="3" id="92f-8p-Ted">
+                                    <fontDescription key="font" type="system" pointSize="11"/>
+                                </label>
+                            </items>
+                            <color key="backgroundColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="levelUpLabel" destination="9US-VI-nfc" id="LpU-m3-kT5"/>
+                        <outlet property="scoreLabel" destination="s09-gO-bZX" id="WWg-GD-4rE"/>
+                        <outlet property="starLabel" destination="ee5-67-ime" id="KwQ-7Z-y6e"/>
+                        <outlet property="summaryLabel" destination="IXs-od-PM7" id="Iqc-pi-cWd"/>
+                        <outlet property="unlockLabel" destination="92f-8p-Ted" id="eAx-NS-gzz"/>
+                        <outlet property="unlockPanel" destination="wqc-sx-qtU" id="QOG-AH-Rns"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="703" y="-125"/>
+        </scene>
+        <!--Alert View Controller-->
+        <scene sceneID="QwC-Ka-z9t">
+            <objects>
+                <controller id="tco-NF-v3p" customClass="AlertViewController" customModule="brainexecise_WatchKit_Extension">
+                    <items>
+                        <button width="1" alignment="left" verticalAlignment="bottom" title="Dismiss" id="RsB-hi-aib">
+                            <connections>
+                                <action selector="dismissClick" destination="tco-NF-v3p" id="BnW-Gf-e74"/>
+                            </connections>
+                        </button>
+                        <label width="1" height="20" alignment="left" text="Title" textAlignment="center" id="sxB-3G-cDK">
+                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                        </label>
+                        <label width="1" height="70" alignment="left" text="msg" textAlignment="center" numberOfLines="2" id="Hxt-n4-xrq">
+                            <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                        </label>
+                    </items>
+                    <connections>
+                        <outlet property="messageLabel" destination="Hxt-n4-xrq" id="xy7-rV-8wp"/>
+                        <outlet property="titleLabel" destination="sxB-3G-cDK" id="M5d-V4-ifS"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="727" y="-371"/>
+        </scene>
+        <!--GameView-->
+        <scene sceneID="CA0-O5-HGB">
+            <objects>
+                <controller identifier="GameView" id="KtD-Yi-Xdf" customClass="GameViewController" customModule="brainexecise_WatchKit_Extension">
+                    <items>
+                        <group width="1" alignment="left" id="BTf-gg-aYE">
+                            <items>
+                                <timer alignment="left" previewedSeconds="30" id="9S0-K5-w0S">
+                                    <calendarUnit key="units" minute="YES" second="YES"/>
+                                </timer>
+                                <label alignment="right" text="Score: 0" id="056-Qd-0mf"/>
+                            </items>
+                        </group>
+                        <label width="1" height="20" alignment="center" text="Cal Game" textAlignment="center" id="Ojc-cm-I8X">
+                            <fontDescription key="font" style="UICTFontTextStyleCaption1"/>
+                        </label>
+                        <label width="1" alignment="center" text="Ready ?" textAlignment="center" id="GlX-7k-Wqp">
+                            <fontDescription key="font" type="system" pointSize="24"/>
+                        </label>
+                        <group width="1" alignment="center" verticalAlignment="bottom" id="tyq-oy-RTs">
+                            <items>
+                                <label alignment="left" text="Stat" id="Tse-WD-grm"/>
+                                <label alignment="right" verticalAlignment="bottom" text="X: 0" id="rNc-zS-xRI">
+                                    <color key="textColor" red="1" green="0.08207910056493628" blue="0.14239877813526647" alpha="1" colorSpace="calibratedRGB"/>
+                                </label>
+                            </items>
+                        </group>
+                        <group width="1" alignment="left" verticalAlignment="bottom" id="Ljn-3n-QCy">
+                            <items>
+                                <button width="0.48999999999999999" alignment="left" title="Ans1" id="sFq-a3-WEb">
+                                    <color key="backgroundColor" red="0.60000002384185791" green="0.40000000596046448" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="system" weight="heavy" pointSize="15"/>
+                                    <connections>
+                                        <action selector="answer1Click" destination="KtD-Yi-Xdf" id="id2-q8-tuI"/>
+                                    </connections>
+                                </button>
+                                <button width="0.48999999999999999" alignment="right" title="Ans2" id="hED-dL-qfm">
+                                    <color key="backgroundColor" red="0.60000002384185791" green="0.40000000596046448" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="system" weight="heavy" pointSize="15"/>
+                                    <connections>
+                                        <action selector="answer2Click" destination="KtD-Yi-Xdf" id="wTD-ws-9bN"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="answer1Button" destination="sFq-a3-WEb" id="m3B-eZ-xat"/>
+                        <outlet property="answer2Button" destination="hED-dL-qfm" id="BnN-5W-Hug"/>
+                        <outlet property="countdownLabel" destination="9S0-K5-w0S" id="eux-63-bPJ"/>
+                        <outlet property="gameNameLabel" destination="Ojc-cm-I8X" id="fOE-MR-9vZ"/>
+                        <outlet property="incorrectLabel" destination="rNc-zS-xRI" id="9r5-iN-De2"/>
+                        <outlet property="questionLabel" destination="GlX-7k-Wqp" id="Kq2-Rr-Lg4"/>
+                        <outlet property="scoreLabel" destination="056-Qd-0mf" id="z87-FJ-j0R"/>
+                        <outlet property="statusLabel" destination="Tse-WD-grm" id="Ofl-9b-oUj"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="398" y="-125"/>
+        </scene>
+        <!--Practice-->
+        <scene sceneID="6sL-e7-Wip">
+            <objects>
+                <controller identifier="GameSelect" title="Practice" id="ENh-Wb-f4D" customClass="GameSelectionViewController" customModule="brainexecise_WatchKit_Extension">
+                    <items>
+                        <button width="1" alignment="left" title="Speed Cal" enabled="NO" id="hj8-Wk-lQJ">
+                            <connections>
+                                <action selector="calGameClick" destination="ENh-Wb-f4D" id="kkC-sI-g7Z"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="True or False" enabled="NO" id="1hS-zD-7PP">
+                            <connections>
+                                <action selector="trueFalseGameClick" destination="ENh-Wb-f4D" id="FoV-7y-shh"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="Operators" enabled="NO" id="ooB-e3-oRL">
+                            <connections>
+                                <action selector="operationGameClick" destination="ENh-Wb-f4D" id="X4S-40-hlJ"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="Low 2 High" enabled="NO" id="Ffc-vt-Exa">
+                            <connections>
+                                <action selector="lowHighGameClick" destination="ENh-Wb-f4D" id="l9W-Yq-ZPT"/>
+                            </connections>
+                        </button>
+                        <button width="1" alignment="left" title="Select Level" id="aJH-ib-aT8">
+                            <connections>
+                                <action selector="selectLevelClick" destination="ENh-Wb-f4D" id="QVN-6b-aMR"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="game1Button" destination="hj8-Wk-lQJ" id="0so-vU-fI8"/>
+                        <outlet property="game2Button" destination="1hS-zD-7PP" id="OZ6-oV-yPB"/>
+                        <outlet property="game3Button" destination="ooB-e3-oRL" id="hQl-m1-ian"/>
+                        <outlet property="game4Button" destination="Ffc-vt-Exa" id="B62-cL-yQ8"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="397" y="115.5"/>
+        </scene>
+        <!--LevelSelect-->
+        <scene sceneID="cG9-FS-t3l">
+            <objects>
+                <controller identifier="LevelSelect" id="cRu-Ez-jpa" customClass="SelectLevelViewController" customModule="brainexecise_WatchKit_Extension">
+                    <items>
+                        <label alignment="left" text="Choose level for Practice mode." numberOfLines="2" id="C1P-7b-C5X">
+                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                        </label>
+                        <group width="1" alignment="center" id="XPC-gh-6u0">
+                            <items>
+                                <button width="0.32000000000000001" alignment="left" title="1" id="qMJ-Jt-4MO">
+                                    <color key="backgroundColor" red="0.60000002384185791" green="0.40000000596046448" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="level1Click" destination="cRu-Ez-jpa" id="S3f-73-oPf"/>
+                                    </connections>
+                                </button>
+                                <button width="0.32000000000000001" alignment="center" title="2" enabled="NO" id="CRF-nZ-iXV">
+                                    <color key="backgroundColor" red="0.60000002384185791" green="0.40000000596046448" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="level2Click" destination="cRu-Ez-jpa" id="BQe-yP-tm1"/>
+                                    </connections>
+                                </button>
+                                <button width="0.32000000000000001" alignment="right" title="3" enabled="NO" id="aq5-dY-7l4">
+                                    <color key="backgroundColor" red="0.60000002384185791" green="0.40000000596046448" blue="0.20000000298023224" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="level3Click" destination="cRu-Ez-jpa" id="f06-T9-ar3"/>
+                                    </connections>
+                                </button>
+                            </items>
+                        </group>
+                        <label alignment="left" verticalAlignment="bottom" text="You choose:" id="Jii-qk-2Ve">
+                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                        </label>
+                        <button width="1" alignment="center" verticalAlignment="bottom" title="Set" id="GOx-Bl-sDh">
+                            <connections>
+                                <action selector="startGameClick" destination="cRu-Ez-jpa" id="Z2G-20-ppR"/>
+                            </connections>
+                        </button>
+                    </items>
+                    <connections>
+                        <outlet property="currentSelectLabel" destination="Jii-qk-2Ve" id="eBH-uU-rDZ"/>
+                        <outlet property="level1Button" destination="qMJ-Jt-4MO" id="nTY-C6-KAA"/>
+                        <outlet property="level2Button" destination="CRF-nZ-iXV" id="poE-oJ-T1t"/>
+                        <outlet property="level3Button" destination="aq5-dY-7l4" id="Yhm-tx-7CR"/>
+                        <outlet property="setButton" destination="GOx-Bl-sDh" id="ZOB-UC-cpz"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="549" y="90"/>
+        </scene>
+        <!--Progress-->
+        <scene sceneID="iQn-uk-Lbd">
+            <objects>
+                <controller identifier="BeginnerProgress" title="Progress" id="PaA-Sp-c9s" customClass="BeginnerProgressViewController" customModule="brainexecise_WatchKit_Extension">
+                    <items>
+                        <label alignment="left" verticalAlignment="bottom" text="hint: Break Hi-score." numberOfLines="2" id="jKG-L7-rmo">
+                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                        </label>
+                        <label alignment="center" alpha="0.0" text="Progress" id="0Vo-no-lQd">
+                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                        </label>
+                        <group width="1" widthAdjustment="-4" height="92" alignment="center" layout="vertical" id="pOS-ma-15e">
+                            <items>
+                                <group width="1" alignment="left" id="2gv-ha-Wfd">
+                                    <items>
+                                        <label width="1" alignment="left" text="Beginner" textAlignment="center" id="yq9-1W-cPU"/>
+                                    </items>
+                                    <color key="backgroundColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </group>
+                                <group width="1" height="0.70000000000000007" alignment="left" id="nZL-Lc-hiX">
+                                    <items>
+                                        <imageView width="40" height="40" alignment="center" verticalAlignment="center" alpha="0.20000000000000001" image="begin_badge" id="Dix-vL-gZc"/>
+                                        <imageView width="40" height="40" alignment="center" verticalAlignment="center" alpha="0.20000000000000001" image="begin_badge" id="1WL-gv-Ayb"/>
+                                        <imageView width="40" height="40" alignment="center" verticalAlignment="center" alpha="0.20000000000000001" image="begin_badge" id="A1x-vl-LvY"/>
+                                    </items>
+                                </group>
+                            </items>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="badge1" destination="Dix-vL-gZc" id="b6y-EJ-Uyo"/>
+                        <outlet property="badge2" destination="1WL-gv-Ayb" id="ant-gp-QJd"/>
+                        <outlet property="badge3" destination="A1x-vl-LvY" id="s9j-ng-rUu"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="861" y="-125"/>
+        </scene>
+        <!--Summary-->
+        <scene sceneID="zkZ-jJ-qI3">
+            <objects>
+                <controller identifier="Summary" id="BAz-lM-ea0" customClass="SummaryViewController" customModule="brainexecise_WatchKit_Extension">
+                    <items>
+                        <group width="1" widthAdjustment="-4" height="1" heightAdjustment="-4" alignment="center" layout="vertical" id="T4q-IE-10T">
+                            <items>
+                                <group width="1" alignment="left" id="Dr2-0d-rRb">
+                                    <items>
+                                        <label width="1" height="20" alignment="left" text="Summary" textAlignment="center" id="rJ1-SK-vWp">
+                                            <fontDescription key="font" style="UICTFontTextStyleBody"/>
+                                        </label>
+                                    </items>
+                                    <color key="backgroundColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                </group>
+                                <label width="1" alignment="left" text="SCORE" textAlignment="center" id="4XM-NU-yvP">
+                                    <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="font" type="system" pointSize="22"/>
+                                </label>
+                                <group width="1" widthAdjustment="-6" alignment="center" id="d1T-9G-hcx">
+                                    <items>
+                                        <label alignment="left" text="Correct:" id="ry6-Nl-fPl">
+                                            <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label alignment="right" text="0" id="bQ5-RQ-3JE">
+                                            <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <group width="1" widthAdjustment="-6" alignment="center" id="cds-z8-tny">
+                                    <items>
+                                        <label alignment="left" text="Incorrect:" id="nua-US-XcE">
+                                            <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label alignment="right" text="0" id="Q7k-xr-Mxo">
+                                            <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <group width="1" widthAdjustment="-6" alignment="center" id="Pgl-4I-uIu">
+                                    <items>
+                                        <label alignment="left" text="Fine:" id="gQe-UN-iRC">
+                                            <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                        <label alignment="right" text="0" id="zQv-cA-eDo">
+                                            <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <group width="1" widthAdjustment="-6" alignment="center" id="F7Z-MR-aZM">
+                                    <items>
+                                        <label alignment="left" text="Total:" id="fpF-gd-yVW">
+                                            <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                        </label>
+                                        <label alignment="right" text="0" id="mJJ-XG-6rg">
+                                            <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                        </label>
+                                    </items>
+                                </group>
+                            </items>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="fineLabel" destination="zQv-cA-eDo" id="wGm-7i-hrm"/>
+                        <outlet property="incorrectLabel" destination="Q7k-xr-Mxo" id="FfV-wd-yg5"/>
+                        <outlet property="incorrectMultiply" destination="gQe-UN-iRC" id="7lJ-T4-gti"/>
+                        <outlet property="scoreLabel" destination="bQ5-RQ-3JE" id="Gyg-A9-jLe"/>
+                        <outlet property="summaryLabel" destination="rJ1-SK-vWp" id="qQB-2g-uaF"/>
+                        <outlet property="totalLabel" destination="mJJ-XG-6rg" id="gyZ-BQ-77e"/>
+                        <outlet property="totalScoreLabel" destination="4XM-NU-yvP" id="NsN-DC-VBG"/>
+                    </connections>
+                </controller>
+            </objects>
+            <point key="canvasLocation" x="703" y="90"/>
+        </scene>
+        <!--Glance Interface Controller-->
+        <scene sceneID="rjY-Ar-IMT">
+            <objects>
+                <glanceController spacing="0.0" id="Sv0-Ai-Zie" customClass="GlanceController" customModule="brainexecise_WatchKit_App" customModuleProvider="target">
+                    <items>
+                        <group alignment="left" id="gv7-I2-MZq">
+                            <items>
+                                <imageView width="44" height="44" alignment="left" image="cicle" id="4di-mi-4xn"/>
+                                <group width="1" height="1" alignment="left" layout="vertical" id="Le9-st-QT8">
+                                    <items>
+                                        <label alignment="left" verticalAlignment="center" text=" Rank" id="B6K-LB-4Ts">
+                                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                        </label>
+                                        <label alignment="left" verticalAlignment="center" text=" Rank" textAlignment="left" id="8sC-Ln-9aQ">
+                                            <fontDescription key="font" style="UICTFontTextStyleFootnote"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="left" verticalAlignment="center" layout="vertical" id="oZL-2Z-8H1">
+                                    <items>
+                                        <label alignment="left" verticalAlignment="center" id="tpU-A9-MfX">
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                        </label>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                        <group alignment="left" layout="vertical" id="eew-Gs-W6Y">
+                            <items>
+                                <group width="1" widthAdjustment="-10" alignment="center" layout="vertical" radius="6" id="epe-aI-zhK">
+                                    <items>
+                                        <group width="1" alignment="left" id="CUS-Qq-sjJ">
+                                            <items>
+                                                <label width="1" height="1" alignment="left" text="  Today's score" id="7iA-qF-YMv">
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="font" style="UICTFontTextStyleSubhead"/>
+                                                </label>
+                                            </items>
+                                            <color key="backgroundColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        </group>
+                                        <label alignment="left" text=" ? " textAlignment="left" id="xzQ-0S-IWh">
+                                            <color key="textColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" type="system" pointSize="42"/>
+                                        </label>
+                                        <label width="1" alignment="left" text=" Update:" id="RYK-f2-0ta">
+                                            <color key="textColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="font" type="boldSystem" pointSize="13"/>
+                                        </label>
+                                    </items>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </group>
+                            </items>
+                        </group>
+                    </items>
+                    <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="14"/>
+                    <connections>
+                        <outlet property="rankLabel" destination="8sC-Ln-9aQ" id="xhs-gn-vjr"/>
+                        <outlet property="stampLabel" destination="RYK-f2-0ta" id="UVb-Lk-NvK"/>
+                        <outlet property="todayScoreLabel" destination="xzQ-0S-IWh" id="HA9-ef-FNc"/>
+                    </connections>
+                </glanceController>
+            </objects>
+            <point key="canvasLocation" x="164" y="514"/>
+        </scene>
+    </scenes>
+    <color key="tintColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
+</document>

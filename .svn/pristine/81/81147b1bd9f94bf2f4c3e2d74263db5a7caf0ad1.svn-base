@@ -1,0 +1,43 @@
+//
+//  StatViewController2.swift
+//  brainexecise
+//
+//  Created by Petch Temeeyasen on 6/4/15.
+//  Copyright (c) 2015 meesoft. All rights reserved.
+//
+
+import WatchKit
+
+class StatViewController2 : WKInterfaceController {
+    
+    @IBOutlet weak var speedCalScoreLabel: WKInterfaceLabel!
+    @IBOutlet weak var trueOrFalseScoreLabel: WKInterfaceLabel!
+    @IBOutlet weak var operatorScoreLabel: WKInterfaceLabel!
+    
+    override func awakeWithContext(context: AnyObject?) {
+        super.awakeWithContext(context)
+        
+        let userSetting: NSUserDefaults! = NSUserDefaults(suiteName: "group.brainexecise")
+        
+        
+        var gameScore1 = userSetting.integerForKey("hiscore1") as Int
+        var gameScore2 = userSetting.integerForKey("hiscore2") as Int
+        var gameScore3 = userSetting.integerForKey("hiscore3") as Int
+        
+        speedCalScoreLabel.setText(String(format: "%d", gameScore1))
+        trueOrFalseScoreLabel.setText(String(format: "%d", gameScore2))
+        operatorScoreLabel.setText(String(format: "%d", gameScore3))
+        self.setTitle("Done")
+    }
+    
+    override func willActivate() {
+        // This method is called when watch view controller is about to be visible to user
+        super.willActivate()
+    }
+    
+    override func didDeactivate() {
+        // This method is called when watch view controller is no longer visible
+        super.didDeactivate()
+    }
+    
+}

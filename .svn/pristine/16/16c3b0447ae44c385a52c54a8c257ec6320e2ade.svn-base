@@ -1,0 +1,26 @@
+//
+//  GameScore.swift
+//  brainexecise
+//
+//  Created by Petch Temeeyasen on 5/19/15.
+//  Copyright (c) 2015 meesoft. All rights reserved.
+//
+
+import Foundation
+
+class GameScore {
+    var score: Int = 0
+    var level: Int = 1
+    var incorrect: Int = 0
+    
+    var gameMode: Int = 0
+    var sender: AnyObject?
+    
+    required init(score: Int, incorrect: Int, level : Int, gameMode: Int, sender: AnyObject? = nil){
+        self.score = score
+        self.incorrect = incorrect
+        self.level = level
+        self.gameMode = gameMode
+        self.sender = sender
+    }
+}

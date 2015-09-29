@@ -1,0 +1,63 @@
+//
+//  DailySummaryController.swift
+//  brainexecise
+//
+//  Created by Petch Temeeyasen on 5/29/15.
+//  Copyright (c) 2015 meesoft. All rights reserved.
+//
+
+import WatchKit
+import Foundation
+
+
+class DailySummaryController: WKInterfaceController {
+    
+    @IBOutlet weak var summaryLabel: WKInterfaceLabel!
+    @IBOutlet weak var scoreLabel: WKInterfaceLabel!
+    @IBOutlet weak var starLabel: WKInterfaceLabel!
+    override func awakeWithContext(context: AnyObject?) {
+        super.awakeWithContext(context)
+        
+        if let setting = context as? NSDictionary {
+            let gameMode = setting["gamemode"] as! Int
+            let isBreak = setting["hiscorebreak"] as! Bool
+            let score = setting["score"] as! Int
+            let level = setting["level"] as! Int
+            let star = setting["star"] as! Int
+            if isBreak {
+                summaryLabel.setText("Hiscore break!!")
+            }
+            
+            scoreLabel.setText(String(format: "%d", score))
+            
+            var starStr = ""
+            //for index in 0...star{
+            if star > 0 {
+                for var index = 0; index < star; ++index {
+                    starStr = starStr  + "★"
+                }
+            }
+            else {
+                starStr = "- - -"
+            }
+            
+            starLabel.setText(starStr)
+        }
+        self.setTitle("")
+    }
+    
+    override func willActivate() {
+        // This method is called when watch view controller is about to be visible to user
+        super.willActivate()
+    }
+    
+    override func didDeactivate() {
+        // This method is called when watch view controller is no longer visible
+        super.didDeactivate()
+    }
+    
+    
+    @IBAction func closeClick() {
+        self.dismissController()
+    }
+}

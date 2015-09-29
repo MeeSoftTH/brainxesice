@@ -1,0 +1,154 @@
+//
+//  InterfaceController.swift
+//  brainexecise WatchKit Extension
+//
+//  Created by Petch Temeeyasen on 5/19/15.
+//  Copyright (c) 2015 meesoft. All rights reserved.
+//
+
+import WatchKit
+import Foundation
+
+
+class InterfaceController: WKInterfaceController, ModalGameOverDelegate {
+    var isPlayedToday: Bool = false
+    var currentGameMode: Int = 0
+    var currentLevel: Int = 0
+    var bonusRedeem: Bool = false  // is bonus redeemed ()
+    
+    override func awakeWithContext(context: AnyObject?) {
+        super.awakeWithContext(context)
+        
+        let userSetting: NSUserDefaults! = NSUserDefaults(suiteName: "group.brainexecise")
+        if let lastDate = userSetting.objectForKey("lastdate") as? NSDate {
+            //let now = NSDate()
+            let calender = NSCalendar.currentCalendar()
+            if calender.isDateInToday(lastDate) {
+                self.isPlayedToday = true
+            }
+        }
+
+    }
+
+    override func willActivate() {
+        // This method is called when watch view controller is about to be visible to user
+        super.willActivate()
+    }
+
+    override func didDeactivate() {
+        // This method is called when watch view controller is no longer visible
+        super.didDeactivate()
+    }
+    
+    func gameOverDelegate(gameScore: GameScore!) {
+        if gameScore != nil {
+            // Store information.
+            let userSetting: NSUserDefaults! = NSUserDefaults(suiteName: "group.brainexecise")
+            
+            if !isPlayedToday {
+                userSetting.setInteger(gameScore.score, forKey: "todayscore")
+                let lastestDate: NSDate = NSDate()
+                userSetting.setObject(lastestDate, forKey: "lastdate")
+                //increaseProgress(userSetting)
+            }
+            increaseProgress(userSetting)
+            var hiscoreBreak: Bool = false
+            var hiscore = userSetting.integerForKey("hiscore") as Int
+            if gameScore.score > hiscore {
+                userSetting.setInteger(gameScore.score, forKey: "hiscore")
+                userSetting.setBool(true, forKey: "iswatchscore")
+                userSetting.setInteger(gameScore.gameMode + 1, forKey: "topgame")
+                hiscoreBreak = true
+            }
+            switch gameScore.gameMode
+            {
+            case 0 :
+                updateHiscore(userSetting, key: "hiscore1", score: gameScore.score)
+                break
+            case 1 :
+                updateHiscore(userSetting, key: "hiscore2", score: gameScore.score)
+                break
+            case 2 :
+                updateHiscore(userSetting, key: "hiscore3", score: gameScore.score)
+                break
+            default :
+                break
+            }
+            
+            popController()
+            
+            presentControllerWithName("DailySummary", context: ["segue": "pagebased", "level": self.currentLevel, "score": gameScore.score, "incorrect": gameScore.incorrect, "star": gameScore.star, "hiscorebreak" : hiscoreBreak, "gamemode": gameScore.gameMode, "sender": self])
+        }
+    }
+
+    
+    @IBAction func playClick() {
+        let rand = randomNumberBetween(0, max: 2)
+        self.currentGameMode = rand
+        let userSetting: NSUserDefaults! = NSUserDefaults(suiteName: "group.brainexecise")
+        
+        var firstTimeGame1 = userSetting.boolForKey("isgame1played")
+        var firstTimeGame2 = userSetting.boolForKey("isgame2played")
+        var firstTimeGame3 = userSetting.boolForKey("isgame3played")
+        var hiscore = userSetting.integerForKey("hiscore") as Int
+        var level = userSetting.integerForKey("level")
+        self.currentLevel = level
+        
+        switch(rand){
+        case 1 :
+            let option = GameSetting(gameMode:1, isPractice: false, level: level, firstTime: firstTimeGame2, hiscore: hiscore, score: 0, sender: self)
+            pushControllerWithName("GameView",context: option)
+            break
+        case 2 :
+            let option = GameSetting(gameMode:2, isPractice: false, level: level, firstTime: firstTimeGame3, hiscore: hiscore, score: 0, sender: self)
+            pushControllerWithName("GameView",context: option)
+            break
+        default :
+            let option = GameSetting(gameMode:0, isPractice: false, level: level, firstTime: firstTimeGame1, hiscore: hiscore, score: 0, sender: self)
+            pushControllerWithName("GameView",context: option)
+            break;
+        }
+    }
+
+    @IBAction func statClick() {
+        pushControllerWithName("InstructionView",context: ["segue": "hierarchical"])
+    }
+    
+    func increaseProgress(setting: NSUserDefaults){
+        
+        let level = setting.integerForKey("level")
+        if level < 3 {
+            let progress = setting.integerForKey("rankprogress")
+            let max = setting.integerForKey("maxprogress")
+            
+            if progress + 1 == max {
+                setting.setInteger(0, forKey: "rankprogress")
+                setting.setInteger(level+1, forKey: "level")
+                
+                setting.setInteger(10, forKey: "maxprogress")
+                if level + 1 == 2 {
+                    setting.setObject("professional", forKey: "rank")
+                }
+                else {
+                    setting.setObject("expert", forKey: "rank")
+                }
+            }
+            else {
+                setting.setInteger(progress + 1, forKey: "rankprogress")
+            }
+
+        }
+    }
+    
+    func updateHiscore(setting: NSUserDefaults, key: String, score: Int){
+        var hiscore1 = setting.integerForKey(key) as Int
+        if score > hiscore1 {
+            setting.setInteger(score, forKey: key)
+        }
+    }
+    
+    func randomNumberBetween(min: Int, max: Int) -> Int {
+        return Int(arc4random_uniform(UInt32(max - min + 1))) + min
+    }
+
+}

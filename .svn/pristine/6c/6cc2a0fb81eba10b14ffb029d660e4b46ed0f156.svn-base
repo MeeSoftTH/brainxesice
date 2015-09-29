@@ -1,0 +1,657 @@
+//
+//  LowToHiViewController.swift
+//  brainexecise
+//
+//  Created by Petch Temeeyasen on 5/19/15.
+//  Copyright (c) 2015 meesoft. All rights reserved.
+//
+
+import WatchKit
+import Foundation
+
+protocol ModalBonusDelegate {
+    func bonusEndDelegate(score: Int)
+}
+
+class LowToHiViewController: WKInterfaceController {
+    
+    var delegate: GameSelectionViewController?
+    var mainGameDelegate: GameViewController?
+    
+    @IBOutlet weak var gameLabel: WKInterfaceLabel!
+    @IBOutlet weak var scoreLabel: WKInterfaceLabel!
+    @IBOutlet weak var button1: WKInterfaceButton!
+    @IBOutlet weak var button2: WKInterfaceButton!
+    @IBOutlet weak var button3: WKInterfaceButton!
+    @IBOutlet weak var button4: WKInterfaceButton!
+    @IBOutlet weak var button5: WKInterfaceButton!
+    @IBOutlet weak var button6: WKInterfaceButton!
+    @IBOutlet weak var button7: WKInterfaceButton!
+    @IBOutlet weak var button8: WKInterfaceButton!
+    @IBOutlet weak var button9: WKInterfaceButton!
+    
+    var level = 1
+    var isPractice: Bool = true
+    var step = 3 // start with 3
+    var currentIndex = 0
+    
+    var score: Int = 0
+    var correct: Int = 0
+    var buttonVals: [Int] = []
+    var answers: [Int] = []
+    
+    var countDown = 3;
+    var countDownTimer: NSTimer!
+    var hideTimer: NSTimer!
+    var nextTimer: NSTimer!
+    var isGameOver: Bool = false
+    var isPlayable: Bool = false
+
+    
+    override func awakeWithContext(context: AnyObject?) {
+        super.awakeWithContext(context)
+        if let setting = context as? NSDictionary {
+            
+            self.isPractice = setting["practice"] as! Bool
+            self.level = setting["level"] as! Int
+            if self.isPractice {
+                self.delegate = setting["sender"] as? GameSelectionViewController
+                gameLabel.setText(String(format: "Low2High LV %d", self.level))
+            }
+            else {
+                self.mainGameDelegate = setting["sender"] as? GameViewController
+                gameLabel.setText(String(format: "Bonus LV %d", self.level))
+                self.setTitle("")
+            }
+            scoreLabel.setAlpha(0)
+            button1.setEnabled(false)
+            button2.setEnabled(false)
+            button3.setEnabled(false)
+            button4.setEnabled(false)
+            button5.setEnabled(false)
+            button6.setEnabled(false)
+            button7.setEnabled(false)
+            button8.setEnabled(false)
+            button9.setEnabled(false)
+            
+            
+            
+            countDownTimer = NSTimer.scheduledTimerWithTimeInterval(1.0,
+                target: self,
+                selector: Selector("countdown"),
+                userInfo: nil,
+                repeats: true)
+            
+        }
+        /*
+        if let setting = context as? GameSetting {
+            
+            if setting.isPractice {
+                self.delegate = setting.sender as? GameSelectionViewController
+            }
+            else {
+                self.mainGameDelegate = setting.sender as? GameViewController
+            }
+            
+            self.level = setting.level
+            self.isPractice = setting.isPractice
+            if self.isPractice {
+                gameLabel.setText(String(format: "Low2High LV %d", self.level))
+            }
+            else {
+                gameLabel.setText(String(format: "Bonus LV %d", self.level))
+                self.setTitle("")
+            }
+            
+            scoreLabel.setAlpha(0)
+            button1.setEnabled(false)
+            button2.setEnabled(false)
+            button3.setEnabled(false)
+            button4.setEnabled(false)
+            button5.setEnabled(false)
+            button6.setEnabled(false)
+            button7.setEnabled(false)
+            button8.setEnabled(false)
+            button9.setEnabled(false)
+            countDownTimer = NSTimer.scheduledTimerWithTimeInterval(1.0,
+                target: self,
+                selector: Selector("countdown"),
+                userInfo: nil,
+                repeats: true)
+        }
+        */
+    }
+    
+    override func willActivate() {
+        // This method is called when watch view controller is about to be visible to user
+        super.willActivate()
+    }
+    
+    override func didDeactivate() {
+        // This method is called when watch view controller is no longer visible
+        super.didDeactivate()
+    }
+    
+    func countdown() {
+        if countDown == 0 {
+            // invalidate and stop timer.
+            gameLabel.setText("")
+            scoreLabel.setAlpha(1.0)
+            self.currentIndex = 0
+            countDownTimer.invalidate()
+            countDownTimer = nil
+            
+            nextQuestion(self.step)
+        }
+        else {
+            gameLabel.setText(String(format:"Ready %d", countDown))
+            countDown--
+        }
+    }
+    
+    func hideButtonText(){
+        button1.setTitle("")
+        button2.setTitle("")
+        button3.setTitle("")
+        button4.setTitle("")
+        button5.setTitle("")
+        button6.setTitle("")
+        button7.setTitle("")
+        button8.setTitle("")
+        button9.setTitle("")
+        hideTimer.invalidate()
+        hideTimer = nil
+        self.isPlayable = true
+    }
+    
+    func doNextStep(){
+        if !self.isGameOver {
+            gameLabel.setText("")
+            clearButtons(1.0)
+            countDown = 3
+            countDownTimer = NSTimer.scheduledTimerWithTimeInterval(1.0,
+                target: self,
+                selector: Selector("countdown"),
+                userInfo: nil,
+                repeats: true)
+        }
+        else {
+            let scoreCard = GameScore(score : self.score, correct: self.correct, incorrect: 0, star: 0, level : self.level, gameMode: 3, bonusMode: 4)
+            
+            if self.isPractice {
+                self.delegate?.gameOverDelegate(scoreCard)
+            }
+            else {
+                self.mainGameDelegate?.bonusEndDelegate(self.score)
+                dismissController()
+            }
+        }
+    }
+    
+    @IBAction func button1Click() {
+        if self.isPlayable && self.buttonVals[0] != 0 {
+            button1.setTitle(String(format:"%d", self.buttonVals[0]))
+            
+            if self.answers[currentIndex] == self.buttonVals[0] {
+                increaseScore()
+            }
+            else {
+                button1.setBackgroundColor(UIColor.redColor())
+                doGameOver()
+            }
+            button1.setEnabled(false)
+        }
+    }
+    
+    @IBAction func button2Click() {
+        if self.isPlayable && self.buttonVals[1] != 0 {
+            button2.setTitle(String(format:"%d", self.buttonVals[1]))
+            
+            if self.answers[currentIndex] == self.buttonVals[1] {
+                increaseScore()
+            }
+            else {
+                button2.setBackgroundColor(UIColor.redColor())
+                doGameOver()
+            }
+            button2.setEnabled(false)
+        }
+    }
+    
+    @IBAction func button3Click() {
+        if self.isPlayable && self.buttonVals[2] != 0 {
+            button3.setTitle(String(format:"%d", self.buttonVals[2]))
+            
+            if self.answers[currentIndex] == self.buttonVals[2] {
+                increaseScore()
+            }
+            else {
+                button3.setBackgroundColor(UIColor.redColor())
+                doGameOver()
+            }
+            button3.setEnabled(false)
+        }
+    }
+    
+    @IBAction func button4Click() {
+        if self.isPlayable && self.buttonVals[3] != 0 {
+            button4.setTitle(String(format:"%d", self.buttonVals[3]))
+            
+            if self.answers[currentIndex] == self.buttonVals[3] {
+                increaseScore()
+            }
+            else {
+                button4.setBackgroundColor(UIColor.redColor())
+                doGameOver()
+            }
+            button4.setEnabled(false)
+        }
+    }
+    
+    @IBAction func button5Click() {
+        if self.isPlayable && self.buttonVals[4] != 0 {
+            button5.setTitle(String(format:"%d", self.buttonVals[4]))
+            
+            if self.answers[currentIndex] == self.buttonVals[4] {
+                increaseScore()
+            }
+            else {
+                button5.setBackgroundColor(UIColor.redColor())
+                doGameOver()
+            }
+            button5.setEnabled(false)
+        }
+    }
+    
+    @IBAction func button6Click() {
+        if self.isPlayable && self.buttonVals[5] != 0 {
+            button6.setTitle(String(format:"%d", self.buttonVals[5]))
+            
+            if self.answers[currentIndex] == self.buttonVals[5] {
+                increaseScore()
+            }
+            else {
+                button6.setBackgroundColor(UIColor.redColor())
+                doGameOver()
+            }
+            button6.setEnabled(false)
+        }
+    }
+    
+    @IBAction func button7Click() {
+        if self.isPlayable && self.buttonVals[6] != 0 {
+            button7.setTitle(String(format:"%d", self.buttonVals[6]))
+            
+            if self.answers[currentIndex] == self.buttonVals[6] {
+                increaseScore()
+            }
+            else {
+                button7.setBackgroundColor(UIColor.redColor())
+                doGameOver()
+            }
+            button7.setEnabled(false)
+        }
+    }
+    
+    @IBAction func button8Click() {
+        if self.isPlayable && self.buttonVals[7] != 0 {
+            button8.setTitle(String(format:"%d", self.buttonVals[7]))
+            
+            if self.answers[currentIndex] == self.buttonVals[7] {
+                increaseScore()
+            }
+            else {
+                button8.setBackgroundColor(UIColor.redColor())
+                doGameOver()
+            }
+            button8.setEnabled(false)
+        }
+    }
+    
+    @IBAction func button9Click() {
+        if self.isPlayable && self.buttonVals[8] != 0 {
+            button9.setTitle(String(format:"%d", self.buttonVals[8]))
+            
+            if self.answers[currentIndex] == self.buttonVals[8] {
+                increaseScore()
+            }
+            else {
+                button9.setBackgroundColor(UIColor.redColor())
+                doGameOver()
+            }
+            button9.setEnabled(false)
+        }
+    }
+    
+    func nextQuestion(step: Int){
+        var infos: [Int] = []
+        if self.level == 1 {
+            for index in 1...step {
+                infos.append(index)
+            }
+        }
+        else if self.level == 2 {
+            let from = 7
+            let to = (step - 1) + 7
+            for index in from...to {
+                infos.append(index)
+            }
+        }
+        else {
+            var temp: [Int] = []
+            for index in 1...32 {
+                temp.append(index)
+            }
+            
+            var tempShuffle: [Int] = shuffle(temp)
+            for index in 1...step {
+                infos.append(tempShuffle[index-1])
+            }
+            infos = infos.sorted(<)
+        }
+        
+        clearButtons(0.0)
+        self.answers  = infos
+        let shufffled = shuffle(infos)
+        switch (step){
+        case 3:
+            button4.setTitle(String(format:"%d", shufffled[0]))
+            button5.setTitle(String(format:"%d", shufffled[1]))
+            button6.setTitle(String(format:"%d", shufffled[2]))
+            
+            buttonVals[3] = shufffled[0]
+            buttonVals[4] = shufffled[1]
+            buttonVals[5] = shufffled[2]
+            
+            button4.setEnabled(true)
+            button5.setEnabled(true)
+            button6.setEnabled(true)
+            
+            button4.setAlpha(1.0)
+            button5.setAlpha(1.0)
+            button6.setAlpha(1.0)
+            
+            break
+        case 4:
+            button2.setTitle(String(format:"%d", shufffled[0]))
+            button4.setTitle(String(format:"%d", shufffled[1]))
+            button6.setTitle(String(format:"%d", shufffled[2]))
+            button8.setTitle(String(format:"%d", shufffled[3]))
+            
+            buttonVals[1] = shufffled[0]
+            buttonVals[3] = shufffled[1]
+            buttonVals[5] = shufffled[2]
+            buttonVals[7] = shufffled[3]
+            
+            button2.setEnabled(true)
+            button4.setEnabled(true)
+            button6.setEnabled(true)
+            button8.setEnabled(true)
+            
+            button2.setAlpha(1.0)
+            button4.setAlpha(1.0)
+            button6.setAlpha(1.0)
+            button8.setAlpha(1.0)
+            break
+        case 5:
+            button1.setTitle(String(format:"%d", shufffled[0]))
+            button3.setTitle(String(format:"%d", shufffled[1]))
+            button5.setTitle(String(format:"%d", shufffled[2]))
+            button7.setTitle(String(format:"%d", shufffled[3]))
+            button9.setTitle(String(format:"%d", shufffled[4]))
+            
+            buttonVals[0] = shufffled[0]
+            buttonVals[2] = shufffled[1]
+            buttonVals[4] = shufffled[2]
+            buttonVals[6] = shufffled[3]
+            buttonVals[8] = shufffled[4]
+            
+            button1.setEnabled(true)
+            button3.setEnabled(true)
+            button5.setEnabled(true)
+            button7.setEnabled(true)
+            button9.setEnabled(true)
+            
+            button1.setAlpha(1.0)
+            button3.setAlpha(1.0)
+            button5.setAlpha(1.0)
+            button7.setAlpha(1.0)
+            button9.setAlpha(1.0)
+            break
+        case 6:
+            button1.setTitle(String(format:"%d", shufffled[0]))
+            button2.setTitle(String(format:"%d", shufffled[1]))
+            button3.setTitle(String(format:"%d", shufffled[2]))
+            button5.setTitle(String(format:"%d", shufffled[3]))
+            button6.setTitle(String(format:"%d", shufffled[4]))
+            button9.setTitle(String(format:"%d", shufffled[5]))
+            
+            buttonVals[0] = shufffled[0]
+            buttonVals[1] = shufffled[1]
+            buttonVals[2] = shufffled[2]
+            buttonVals[4] = shufffled[3]
+            buttonVals[5] = shufffled[4]
+            buttonVals[8] = shufffled[5]
+            
+            button1.setEnabled(true)
+            button2.setEnabled(true)
+            button3.setEnabled(true)
+            button5.setEnabled(true)
+            button6.setEnabled(true)
+            button9.setEnabled(true)
+            
+            button1.setAlpha(1.0)
+            button2.setAlpha(1.0)
+            button3.setAlpha(1.0)
+            button5.setAlpha(1.0)
+            button6.setAlpha(1.0)
+            button9.setAlpha(1.0)
+
+            break
+        case 7:
+            button1.setTitle(String(format:"%d", shufffled[0]))
+            button2.setTitle(String(format:"%d", shufffled[1]))
+            button3.setTitle(String(format:"%d", shufffled[2]))
+            button4.setTitle(String(format:"%d", shufffled[3]))
+            button5.setTitle(String(format:"%d", shufffled[4]))
+            button6.setTitle(String(format:"%d", shufffled[5]))
+            button9.setTitle(String(format:"%d", shufffled[6]))
+            
+            buttonVals[0] = shufffled[0]
+            buttonVals[1] = shufffled[1]
+            buttonVals[2] = shufffled[2]
+            buttonVals[3] = shufffled[3]
+            buttonVals[4] = shufffled[4]
+            buttonVals[5] = shufffled[5]
+            buttonVals[8] = shufffled[6]
+            
+            button1.setEnabled(true)
+            button2.setEnabled(true)
+            button3.setEnabled(true)
+            button4.setEnabled(true)
+            button5.setEnabled(true)
+            button6.setEnabled(true)
+            button9.setEnabled(true)
+            
+            button1.setAlpha(1.0)
+            button2.setAlpha(1.0)
+            button3.setAlpha(1.0)
+            button4.setAlpha(1.0)
+            button5.setAlpha(1.0)
+            button6.setAlpha(1.0)
+            button9.setAlpha(1.0)
+            break
+        case 8:
+            button1.setTitle(String(format:"%d", shufffled[0]))
+            button2.setTitle(String(format:"%d", shufffled[1]))
+            button3.setTitle(String(format:"%d", shufffled[2]))
+            button4.setTitle(String(format:"%d", shufffled[3]))
+            button6.setTitle(String(format:"%d", shufffled[4]))
+            button7.setTitle(String(format:"%d", shufffled[5]))
+            button8.setTitle(String(format:"%d", shufffled[6]))
+            button9.setTitle(String(format:"%d", shufffled[7]))
+            
+            buttonVals[0] = shufffled[0]
+            buttonVals[1] = shufffled[1]
+            buttonVals[2] = shufffled[2]
+            buttonVals[3] = shufffled[3]
+            buttonVals[5] = shufffled[4]
+            buttonVals[6] = shufffled[5]
+            buttonVals[7] = shufffled[6]
+            buttonVals[8] = shufffled[7]
+            
+            button1.setEnabled(true)
+            button2.setEnabled(true)
+            button3.setEnabled(true)
+            button4.setEnabled(true)
+            button6.setEnabled(true)
+            button7.setEnabled(true)
+            button8.setEnabled(true)
+            button9.setEnabled(true)
+            
+            button1.setAlpha(1.0)
+            button2.setAlpha(1.0)
+            button3.setAlpha(1.0)
+            button4.setAlpha(1.0)
+            button6.setAlpha(1.0)
+            button7.setAlpha(1.0)
+            button8.setAlpha(1.0)
+            button9.setAlpha(1.0)
+            break
+        case 9:
+            button1.setTitle(String(format:"%d", shufffled[0]))
+            button2.setTitle(String(format:"%d", shufffled[1]))
+            button3.setTitle(String(format:"%d", shufffled[2]))
+            button4.setTitle(String(format:"%d", shufffled[3]))
+            button5.setTitle(String(format:"%d", shufffled[4]))
+            button6.setTitle(String(format:"%d", shufffled[5]))
+            button7.setTitle(String(format:"%d", shufffled[6]))
+            button8.setTitle(String(format:"%d", shufffled[7]))
+            button9.setTitle(String(format:"%d", shufffled[8]))
+            
+            buttonVals[0] = shufffled[0]
+            buttonVals[1] = shufffled[1]
+            buttonVals[2] = shufffled[2]
+            buttonVals[3] = shufffled[3]
+            buttonVals[4] = shufffled[4]
+            buttonVals[5] = shufffled[5]
+            buttonVals[6] = shufffled[6]
+            buttonVals[7] = shufffled[7]
+            buttonVals[8] = shufffled[8]
+            
+            button1.setEnabled(true)
+            button2.setEnabled(true)
+            button3.setEnabled(true)
+            button4.setEnabled(true)
+            button5.setEnabled(true)
+            button6.setEnabled(true)
+            button7.setEnabled(true)
+            button8.setEnabled(true)
+            button9.setEnabled(true)
+            
+            button1.setAlpha(1.0)
+            button2.setAlpha(1.0)
+            button3.setAlpha(1.0)
+            button4.setAlpha(1.0)
+            button5.setAlpha(1.0)
+            button6.setAlpha(1.0)
+            button7.setAlpha(1.0)
+            button8.setAlpha(1.0)
+            button9.setAlpha(1.0)
+            break
+        default:
+            break
+        }
+        
+        hideTimer = NSTimer.scheduledTimerWithTimeInterval(3.5,
+            target: self,
+            selector: Selector("hideButtonText"),
+            userInfo: nil,
+            repeats: false)
+        
+    }
+    
+    func clearButtons(alpha: CGFloat){
+        button1.setTitle("")
+        button2.setTitle("")
+        button3.setTitle("")
+        button4.setTitle("")
+        button5.setTitle("")
+        button6.setTitle("")
+        button7.setTitle("")
+        button8.setTitle("")
+        button9.setTitle("")
+        
+        
+        button1.setAlpha(alpha)
+        button2.setAlpha(alpha)
+        button3.setAlpha(alpha)
+        button4.setAlpha(alpha)
+        button5.setAlpha(alpha)
+        button6.setAlpha(alpha)
+        button7.setAlpha(alpha)
+        button8.setAlpha(alpha)
+        button9.setAlpha(alpha)
+        
+        buttonVals = [0, 0, 0, 0, 0, 0, 0, 0, 0]
+    }
+    
+    func increaseScore() {
+        
+        self.currentIndex++
+        if self.currentIndex == self.answers.count {
+            gameLabel.setText(String(format:"+%d", self.currentIndex * self.level))
+            self.correct += self.currentIndex
+            self.score += self.currentIndex * self.level
+            scoreLabel.setText(String(format: "Score: %d", self.score))
+            self.currentIndex = 0
+            self.step++
+            self.isPlayable = false
+            if self.step > 9 {
+                // Game over.
+                self.isGameOver = true
+            }
+            //scoreLabel.setAlpha(0)
+            nextTimer = NSTimer.scheduledTimerWithTimeInterval(2.1,
+                target: self,
+                selector: Selector("doNextStep"),
+                userInfo: nil,
+                repeats: false)
+        }
+    }
+    
+    func doGameOver(){
+        // reval all possible
+        button1.setTitle(String(format:"%d", buttonVals[0]))
+        button2.setTitle(String(format:"%d", buttonVals[1]))
+        button3.setTitle(String(format:"%d", buttonVals[2]))
+        button4.setTitle(String(format:"%d", buttonVals[3]))
+        button5.setTitle(String(format:"%d", buttonVals[4]))
+        button6.setTitle(String(format:"%d", buttonVals[5]))
+        button7.setTitle(String(format:"%d", buttonVals[6]))
+        button8.setTitle(String(format:"%d", buttonVals[7]))
+        button9.setTitle(String(format:"%d", buttonVals[8]))
+        
+        scoreLabel.setText(String(format: "Game Over: %d", self.score))
+        scoreLabel.setTextColor(UIColor.redColor())
+        gameLabel.setText("")
+        //gameLabel.setTextColor(UIColor.redColor())
+        self.isPlayable = false
+        self.isGameOver = true
+        nextTimer = NSTimer.scheduledTimerWithTimeInterval(2.1,
+            target: self,
+            selector: Selector("doNextStep"),
+            userInfo: nil,
+            repeats: false)
+    }
+    
+    func shuffle<C: MutableCollectionType where C.Index == Int>(var list: C) -> C {
+        let c = count(list)
+        for i in 0..<(c - 1) {
+            let j = Int(arc4random_uniform(UInt32(c - i))) + i
+            swap(&list[i], &list[j])
+        }
+        return list
+    }
+
+}

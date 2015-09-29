@@ -1,0 +1,150 @@
+//
+//  SelectLevelViewController.swift
+//  brainexecise
+//
+//  Created by Petch Temeeyasen on 5/19/15.
+//  Copyright (c) 2015 meesoft. All rights reserved.
+//
+
+import WatchKit
+import Foundation
+
+protocol ModalLevelSelectedDelegate {
+    func selectedLevelDelegate(level: Int)
+}
+
+class SelectLevelViewController: WKInterfaceController {
+    
+    var delegate: GameSelectionViewController?
+    //var gameSetting: GameSetting!
+    
+    var selectedLevel: Int = 1
+    
+    var gameMode: Int = -1
+    var isFromGame: Bool = false
+    
+    var defaultColor: UIColor = UIColor(red: 120.0/255.0, green:63.0/255.0, blue:4.0/255.0, alpha:1.0)
+    var selectedColor: UIColor = UIColor.brownColor()
+    
+    @IBOutlet weak var level1Button: WKInterfaceButton!
+    @IBOutlet weak var level2Button: WKInterfaceButton!
+    @IBOutlet weak var level3Button: WKInterfaceButton!
+    
+    @IBOutlet weak var setButton: WKInterfaceButton!
+    //var selectLevel: Int = 0
+    
+    
+    override func awakeWithContext(context: AnyObject?) {
+        super.awakeWithContext(context)
+        
+        if let setting = context as? NSDictionary {
+            
+            selectedLevel = setting["level"] as! Int
+            self.gameMode = setting["gamemode"] as! Int
+            
+            self.isFromGame = self.gameMode >= 0
+            
+            if self.isFromGame {
+                setButton.setTitle("Start")
+            }
+            else {
+                setButton.setTitle("Set")
+                self.delegate = setting["sender"] as? GameSelectionViewController
+            }
+            
+            let max = setting["maxlevel"] as! Int
+            
+            if max > 1 {
+                level2Button.setEnabled(true)
+            }
+            if max > 2 {
+                level3Button.setEnabled(true)
+            }
+            if selectedLevel == 1 {
+                level1Click()
+            }
+            else if selectedLevel == 2 {
+                level2Click()
+            }
+            else if selectedLevel == 3 {
+                level3Click()
+            }
+            
+        }
+        
+        
+        /*
+        if let setting = context as? GameSetting {
+            gameSetting = setting
+            if gameSetting.maxLevel > 1 {
+                level2Button.setEnabled(true)
+            }
+            if gameSetting.maxLevel > 2 {
+                level3Button.setEnabled(true)
+            }
+            if gameSetting.level == 1 {
+                level1Click()
+            }
+            else if gameSetting.level == 2 {
+                level2Click()
+            }
+            else if gameSetting.level == 3 {
+                level3Click()
+            }
+            self.delegate = gameSetting.sender as? GameSelectionViewController
+        }*/
+    }
+    
+    override func willActivate() {
+        // This method is called when watch view controller is about to be visible to user
+        super.willActivate()
+    }
+    
+    override func didDeactivate() {
+        // This method is called when watch view controller is no longer visible
+        super.didDeactivate()
+    }
+
+    @IBOutlet weak var currentSelectLabel: WKInterfaceLabel!
+    
+    @IBAction func level1Click() {
+        
+        level1Button.setBackgroundColor(selectedColor)
+        level2Button.setBackgroundColor(defaultColor)
+        level3Button.setBackgroundColor(defaultColor)
+        currentSelectLabel.setText("You select: 1")
+        //gameSetting.level = 1
+        selectedLevel = 1
+        //self.delegate?.selectedLevelDelegate(gameSetting)
+    }
+    @IBAction func level2Click() {
+        level1Button.setBackgroundColor(defaultColor)
+        level2Button.setBackgroundColor(selectedColor)
+        level3Button.setBackgroundColor(defaultColor)
+        currentSelectLabel.setText("You select: 2")
+        //gameSetting.level = 2
+        selectedLevel=2
+        //self.delegate?.selectedLevelDelegate(gameSetting)
+    }
+    
+    @IBAction func level3Click() {
+        level1Button.setBackgroundColor(defaultColor)
+        level2Button.setBackgroundColor(defaultColor)
+        level3Button.setBackgroundColor(selectedColor)
+        currentSelectLabel.setText("You select: 3")
+        //gameSetting.level = 3
+        selectedLevel=3
+        //self.delegate?.selectedLevelDelegate(gameSetting)
+    }
+    
+    @IBAction func startGameClick() {
+        if self.isFromGame {
+        }
+        else {
+            self.delegate?.selectedLevelDelegate(selectedLevel)
+            self.dismissController()
+        }
+        //popController()
+        //pushControllerWithName("GameView",context: gameSetting)
+    }
+}

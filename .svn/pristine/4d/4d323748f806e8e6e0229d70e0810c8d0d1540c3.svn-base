@@ -1,0 +1,109 @@
+//
+//  GameSelectionViewController.swift
+//  brainexecise
+//
+//  Created by Petch Temeeyasen on 5/19/15.
+//  Copyright (c) 2015 meesoft. All rights reserved.
+//
+
+import WatchKit
+import Foundation
+
+class GameSelectionViewController: WKInterfaceController, ModalLevelSelectedDelegate, ModalGameOverDelegate, ModalRetryDelegate  {
+    
+    @IBOutlet weak var game2Button: WKInterfaceButton!
+    
+    @IBOutlet weak var game3Button: WKInterfaceButton!
+    
+    @IBOutlet weak var game4Button: WKInterfaceButton!
+    
+    @IBOutlet weak var game5Button: WKInterfaceButton!
+    
+    var maxAvailableLevel: Int = 2
+    
+    var currentLevel: Int = 1
+    
+    var hiscores: [Int] = [10, 10, 10]
+    
+    var lastGameMode: Int = 0
+    
+    override func awakeWithContext(context: AnyObject?) {
+        super.awakeWithContext(context)
+        
+        let userSetting: NSUserDefaults! = NSUserDefaults(suiteName: "group.brainexecise")
+        
+        
+        if let isPurchase = userSetting.boolForKey("ispurchased") as Bool? {
+            if(isPurchase){
+                game4Button.setEnabled(true)
+                game5Button.setEnabled(true)
+            }
+        }
+    }
+    
+    override func willActivate() {
+        // This method is called when watch view controller is about to be visible to user
+        super.willActivate()
+    }
+    
+    override func didDeactivate() {
+        // This method is called when watch view controller is no longer visible
+        super.didDeactivate()
+    }
+    
+    func selectedLevelDelegate(level: Int) {
+        self.currentLevel = level
+        NSLog(String(format:"selected level: %d", self.currentLevel))
+        //popController()
+    }
+    
+    func gameOverDelegate(gameScore: GameScore!) {
+        if gameScore != nil {
+            popController()
+            if gameScore.score > hiscores[gameScore.gameMode] {
+                hiscores[gameScore.gameMode] = gameScore.score
+            }
+            lastGameMode = gameScore.gameMode
+            /*
+            let scoreCard = GameScore(score : gameScore.score, incorrect: gameScore.incorrect, level : gameScore.level, gameMode: gameScore.gameMode, sender: self)
+            pushControllerWithName("Summary",context: scoreCard)
+            */
+            presentControllerWithName("Summary", context: ["segue": "pagebased", "level": self.currentLevel, "score": gameScore.score, "incorrect": gameScore.incorrect, "gamemode": gameScore.gameMode, "sender": self])
+        }
+    }
+    
+    func retryDelegate(gameMode: Int){
+        NSLog(String(format:"retry game: %d", gameMode))
+        if gameMode >= 0 {
+            //popController()
+            let option = GameSetting(gameMode:gameMode, isPractice: true, level: self.currentLevel, firstTime: true, hiscore:  hiscores[lastGameMode], score: 0, sender: self)
+            pushControllerWithName("GameView",context: option)
+        }
+    }
+
+    @IBAction func calGameClick() {
+        let option = GameSetting(gameMode:0, isPractice: true, level: self.currentLevel, firstTime: true, hiscore: hiscores[0], score: 0, sender: self)
+        pushControllerWithName("GameView",context: option)
+    }
+    
+    @IBAction func trueFalseGameClick() {
+        let option = GameSetting(gameMode:1, isPractice: true, level: self.currentLevel, firstTime: true, hiscore: hiscores[1], score: 0, sender: self)
+        pushControllerWithName("GameView",context: option)
+    }
+    
+    @IBAction func operationGameClick() {
+        let option = GameSetting(gameMode:2, isPractice: true, level: self.currentLevel, firstTime: true, hiscore: hiscores[2], score: 0, sender: self)
+        pushControllerWithName("GameView",context: option)
+    }
+    
+    @IBAction func lowHighGameClick() {
+    }
+    @IBAction func stroopGameClick() {
+    }
+    @IBAction func selectLevelClick() {
+        //let option = GameSetting(gameMode:-1, isPractice: true, level: self.currentLevel, firstTime: true, hiscore: hiscores[lastGameMode], score: 0, maxLevel: maxAvailableLevel, sender: self)
+        
+        //let contextOptions =
+        presentControllerWithName("LevelSelect", context: ["segue": "pagebased", "level": self.currentLevel, "gamemode" : -1, "maxlevel": maxAvailableLevel, "sender": self])
+    }
+}

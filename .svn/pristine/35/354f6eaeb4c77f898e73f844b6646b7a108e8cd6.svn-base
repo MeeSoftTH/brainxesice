@@ -1,0 +1,116 @@
+//
+//  DailySummaryController.swift
+//  brainexecise
+//
+//  Created by Petch Temeeyasen on 5/29/15.
+//  Copyright (c) 2015 meesoft. All rights reserved.
+//
+
+import WatchKit
+import Foundation
+
+protocol ModalShowProgressDelegate {
+    func showProgressDelegate()
+}
+
+class DailySummaryController: WKInterfaceController {
+    
+    @IBOutlet weak var levelUpLabel: WKInterfaceLabel!
+    @IBOutlet weak var summaryLabel: WKInterfaceLabel!
+    @IBOutlet weak var scoreLabel: WKInterfaceLabel!
+    @IBOutlet weak var starLabel: WKInterfaceLabel!
+    
+    @IBOutlet weak var unlockPanel: WKInterfaceGroup!
+    @IBOutlet weak var unlockLabel: WKInterfaceLabel!
+    //@IBOutlet weak var closeButton: WKInterfaceButton!
+    
+    //var mainGameDelegate: InterfaceController?
+    var progressUpdate: Bool = false
+    var level: Int = 1
+    
+    override func awakeWithContext(context: AnyObject?) {
+        super.awakeWithContext(context)
+        
+        if let setting = context as? NSDictionary {
+            
+            //self.mainGameDelegate = setting["sender"]  as? InterfaceController
+            let gameMode = setting["gamemode"] as! Int
+            let isBreak = setting["hiscorebreak"] as! Bool
+            let score = setting["score"] as! Int
+            self.level = setting["level"] as! Int
+            let star = setting["star"] as! Int
+            let unlockMsg = setting["msg"] as! String
+            progressUpdate = setting["progressupdate"] as! Bool
+            if isBreak {
+                summaryLabel.setText("Hiscore break!!")
+            }
+            
+            if unlockMsg != "" {
+                unlockLabel.setText(String(format: "%@",unlockMsg))
+                unlockPanel.setAlpha(1.0)
+            }
+            else {
+                unlockPanel.setAlpha(0)
+                unlockLabel.setText("")
+            }
+            if progressUpdate {
+                //levelUpLabel.setAlpha(1.0)
+                //closeButton.setTitle("View Progress")
+            }
+            else {
+                //levelUpLabel.setAlpha(0)
+            }
+            
+            scoreLabel.setText(String(format: "%d", score))
+            
+            var starStr = ""
+            //for index in 0...star{
+            if star > 0 {
+                for var index = 0; index < star; ++index {
+                    starStr = starStr  + "★"
+                }
+            }
+            else {
+                starStr = "- - -"
+            }
+            
+            starLabel.setText(starStr)
+        }
+        self.setTitle("Done")
+    }
+    
+    override func willActivate() {
+        // This method is called when watch view controller is about to be visible to user
+        super.willActivate()
+    }
+    
+    override func didDeactivate() {
+        // This method is called when watch view controller is no longer visible
+        /*
+        if progressUpdate {
+            if self.mainGameDelegate != nil {
+                self.mainGameDelegate?.showProgressDelegate()
+            }
+        }*/
+        super.didDeactivate()
+    }
+    
+    /*
+    @IBAction func closeClick() {
+        /*if progressUpdate {
+            if self.level == 1 {
+                presentControllerWithName("BeginnerProgress", context: ["segue": "pagebased", "sender": self])
+            }
+            else if self.level == 2 {
+                presentControllerWithName("ProProgress", context: ["segue": "pagebased", "sender": self])
+            }
+            
+        }
+        else {
+            self.dismissController()
+        }
+        */
+        self.dismissController()
+    }
+*/
+}

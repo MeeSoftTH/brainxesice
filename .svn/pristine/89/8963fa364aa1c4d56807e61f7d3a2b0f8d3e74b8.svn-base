@@ -1,0 +1,72 @@
+//
+//  GameSelectionViewController.swift
+//  brainexecise
+//
+//  Created by Petch Temeeyasen on 5/19/15.
+//  Copyright (c) 2015 meesoft. All rights reserved.
+//
+
+import WatchKit
+import Foundation
+
+class GameSelectionViewController: WKInterfaceController, ModalLevelSelectedDelegate  {
+    
+    var setting: GameSetting!
+    var currentLevel: Int = 1
+    
+    override func awakeWithContext(context: AnyObject?) {
+        super.awakeWithContext(context)
+        
+        // Configure interface objects here.
+    }
+    
+    override func willActivate() {
+        // This method is called when watch view controller is about to be visible to user
+        super.willActivate()
+    }
+    
+    override func didDeactivate() {
+        // This method is called when watch view controller is no longer visible
+        super.didDeactivate()
+    }
+    
+    func selectedLevelDelegate(level: Int) {
+        self.currentLevel = level
+        //self.setting = setting
+        NSLog(String(format:"selected level: %d", self.currentLevel))
+        //pushControllerWithName("GameView",context: self.setting)
+    }
+    
+
+    @IBAction func calGameClick() {
+        /*let options = GameSetting(gameMode:0, isPractice: true, level: 2, firstTime: true, hiscore: 32, score: 0, sender: self)
+        pushControllerWithName("LevelSelect",context: options)
+*/
+        
+        if(self.setting == nil) {
+            self.setting = GameSetting(gameMode:0, isPractice: true, level: 1, firstTime: true, hiscore: 32, score: 0, sender: self)
+        }
+        pushControllerWithName("GameView",context: self.setting)
+        
+    }
+    @IBAction func trueFalseGameClick() {
+        //pushControllerWithName("InstructionView",context: ["segue": "hierarchical"])
+        let options = GameSetting(gameMode:1, isPractice: true, level: 2, firstTime: true, hiscore: 32, score: 0, sender: self)
+        pushControllerWithName("LevelSelect",context: options)
+    }
+    @IBAction func operationGameClick() {
+        let options = GameSetting(gameMode:2, isPractice: true, level: 2, firstTime: true, hiscore: 32, score: 0, sender: self)
+        pushControllerWithName("LevelSelect",context: options)
+    }
+    @IBAction func lowHighGameClick() {
+    }
+    @IBAction func stroopGameClick() {
+    }
+    @IBAction func selectLevelClick() {
+        //if(self.setting == nil) {
+            self.setting = GameSetting(gameMode:0, isPractice: true, level: 2, firstTime: true, hiscore: 32, score: 0, sender: self)
+        //}
+        
+        pushControllerWithName("LevelSelect",context: self.setting)
+    }
+}

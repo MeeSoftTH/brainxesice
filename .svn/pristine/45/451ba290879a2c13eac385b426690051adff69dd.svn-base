@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>Glance - brainexecise WatchKit App.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>WatchCoreDataProxy.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>brainexecise WatchKit App.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>brainexecise.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>0</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>B2671C561B0AE91F00F5247C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B2671C6E1B0AE91F00F5247C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B2671C8E1B0AEA3700F5247C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B2D5A6501B0EE7560056F1F7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B2D5A65A1B0EE7560056F1F7</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>
