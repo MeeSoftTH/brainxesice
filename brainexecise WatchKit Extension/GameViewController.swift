@@ -556,7 +556,7 @@ class GameViewController: WKInterfaceController, ModalBonusDelegate {
             self.correctCount = 0
 
             self.startTime = NSDate()
-            var date = NSDate(timeIntervalSinceNow: self.duration)
+            let date = NSDate(timeIntervalSinceNow: self.duration)
             countdownLabel.setDate(date)
             countdownLabel.start()
             

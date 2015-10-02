@@ -93,7 +93,7 @@ class InterfaceController: WKInterfaceController, ModalGameOverDelegate {
             if practiceUnlock {
                 practiceButton.setEnabled(true)
             }
-            var level = userSetting.integerForKey("level") as Int
+            let level = userSetting.integerForKey("level") as Int
             if level == 1 {
                 beginProgress1Pass = userSetting.boolForKey("beginnerprogress1")
                 beginProgress2Pass = userSetting.boolForKey("beginnerprogress2")
@@ -144,7 +144,7 @@ class InterfaceController: WKInterfaceController, ModalGameOverDelegate {
             }
             
             var hiscoreBreak: Bool = false
-            var hiscore = userSetting.integerForKey("hiscore") as Int
+            let hiscore = userSetting.integerForKey("hiscore") as Int
             if gameScore.score > hiscore {
                 userSetting.setInteger(gameScore.score, forKey: "hiscore")
                 userSetting.setBool(true, forKey: "iswatchscore")
@@ -251,18 +251,18 @@ class InterfaceController: WKInterfaceController, ModalGameOverDelegate {
     @IBAction func playClick() {
         let userSetting: NSUserDefaults! = NSUserDefaults(suiteName: "group.brainexecise")
         
-        var hiscore = userSetting.integerForKey("hiscore") as Int
-        var level = userSetting.integerForKey("level") as Int
+        let hiscore = userSetting.integerForKey("hiscore") as Int
+        let level = userSetting.integerForKey("level") as Int
         self.currentLevel = level
         
-        var dailyPlayCount = userSetting.integerForKey("dailyplay") as Int
-        var game1PlayCount = userSetting.integerForKey("game1play") as Int
-        var game2PlayCount = userSetting.integerForKey("game2play") as Int
-        var game3PlayCount = userSetting.integerForKey("game3play") as Int
+        let dailyPlayCount = userSetting.integerForKey("dailyplay") as Int
+        let game1PlayCount = userSetting.integerForKey("game1play") as Int
+        let game2PlayCount = userSetting.integerForKey("game2play") as Int
+        let game3PlayCount = userSetting.integerForKey("game3play") as Int
         
-        var firstTimeGame1 = game1PlayCount == 0
-        var firstTimeGame2 = game2PlayCount == 0
-        var firstTimeGame3 = game3PlayCount == 0
+        let firstTimeGame1 = game1PlayCount == 0
+        let firstTimeGame2 = game2PlayCount == 0
+        let firstTimeGame3 = game3PlayCount == 0
         
         var rand: Int = 0
         if dailyPlayCount < 3 {
@@ -333,7 +333,7 @@ class InterfaceController: WKInterfaceController, ModalGameOverDelegate {
     }
     
     func updateHiscore(setting: NSUserDefaults, key: String, score: Int) -> Bool {
-        var hiscore1 = setting.integerForKey(key) as Int
+        let hiscore1 = setting.integerForKey(key) as Int
         if score > hiscore1 {
             setting.setInteger(score, forKey: key)
             return score > 10
@@ -342,8 +342,8 @@ class InterfaceController: WKInterfaceController, ModalGameOverDelegate {
     }
     
     func increasePlayedStat(setting: NSUserDefaults, key: String) -> Int {
-        var val = setting.integerForKey(key) as Int
-        var res: Int = val + 1
+        let val = setting.integerForKey(key) as Int
+        let res: Int = val + 1
         setting.setInteger(res, forKey: key)
         
         return res

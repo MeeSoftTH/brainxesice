@@ -20,13 +20,13 @@ class ViewController: UIViewController, SKProductsRequestDelegate, SKPaymentTran
         self.title = "30 sec test"
         // Set IAPS
         if(SKPaymentQueue.canMakePayments()) {
-            println("IAP is enabled, loading")
-            var productID:NSSet = NSSet(objects: "th.co.meesoft.brainexecise.unlock")
-            var request: SKProductsRequest = SKProductsRequest(productIdentifiers: productID as Set<NSObject>)
+            print("IAP is enabled, loading")
+            let productID:NSSet = NSSet(objects: "th.co.meesoft.brainexecise.unlock")
+            let request: SKProductsRequest = SKProductsRequest(productIdentifiers: productID as! Set<String>)
             request.delegate = self
             request.start()
         } else {
-            println("please enable IAPS")
+            print("please enable IAPS")
         }
         
         let userSetting: NSUserDefaults! = NSUserDefaults(suiteName: "group.brainexecise")
@@ -90,7 +90,7 @@ class ViewController: UIViewController, SKProductsRequestDelegate, SKPaymentTran
     
     @IBAction func UnlockClick(sender: AnyObject) {
         for product in list {
-            var prodID = product.productIdentifier
+            let prodID = product.productIdentifier
             if(prodID == "th.co.meesoft.brainexecise.unlock") {
                 p = product
                 makePurchase()
@@ -103,71 +103,71 @@ class ViewController: UIViewController, SKProductsRequestDelegate, SKPaymentTran
     var p = SKProduct()
 
     func makePurchase() {
-        println("purchasing: " + p.productIdentifier)
-        var pay = SKPayment(product: p)
+        print("purchasing: " + p.productIdentifier)
+        let pay = SKPayment(product: p)
         SKPaymentQueue.defaultQueue().addTransactionObserver(self)
         SKPaymentQueue.defaultQueue().addPayment(pay as SKPayment)
     }
     
-    func productsRequest(request: SKProductsRequest!, didReceiveResponse response: SKProductsResponse!) {
-        println("product request")
-        var myProduct = response.products
+    func productsRequest(request: SKProductsRequest, didReceiveResponse response: SKProductsResponse) {
+        print("product request")
+        let myProduct = response.products
         
         for product in myProduct {
-            println("product added")
-            println(product.productIdentifier)
-            println(product.localizedTitle)
-            println(product.localizedDescription)
-            println(product.price)
+            print("product added")
+            print(product.productIdentifier)
+            print(product.localizedTitle)
+            print(product.localizedDescription)
+            print(product.price)
             
-            list.append(product as! SKProduct)
+            list.append(product )
         }
     }
     
-    func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue!) {
-        println("transactions restored")
-        var purchasedItemIDS = []
+    func paymentQueueRestoreCompletedTransactionsFinished(queue: SKPaymentQueue) {
+        print("transactions restored")
+        //var purchasedItemIDS = []
         for transaction in queue.transactions {
-            var t: SKPaymentTransaction = transaction as! SKPaymentTransaction
+            let t: SKPaymentTransaction = transaction 
             
             let prodID = t.payment.productIdentifier as String
             if(prodID == "th.co.meesoft.brainexecise.unlock"){
-                println("Unlock to full version.")
+                print("Unlock to full version.")
                 doUnlockFeatures()
             }
             else {
-                println("IAP not setup")
+                print("IAP not setup")
             }
         }
     }
     
-    func paymentQueue(queue: SKPaymentQueue!, updatedTransactions transactions: [AnyObject]!) {
+    func paymentQueue(queue: SKPaymentQueue, updatedTransactions transactions: [SKPaymentTransaction]) {
         for transaction:AnyObject in transactions {
-            var trans = transaction as! SKPaymentTransaction
-            println(trans.error)
+            let trans = transaction as! SKPaymentTransaction
+            print(trans.error)
             
             switch trans.transactionState {
             case .Purchased:
-                println("Buying success: Unlock features.")
-                println(p.productIdentifier)
+                print("Buying success: Unlock features.")
+                print(p.productIdentifier)
                 
                 let prodID = p.productIdentifier as String
                 if(prodID == "th.co.meesoft.brainexecise.unlock"){
-                    println("Unlock to full version.")
+                    print("Unlock to full version.")
                     doUnlockFeatures()
                 }
                 else {
-                    println("IAP not setup")
+                    print("IAP not setup")
                 }
                 
                 queue.finishTransaction(trans)
                 break;
             case .Failed:
-                println("buy error")
+                print("buy error")
                 queue.finishTransaction(trans)
                 break;
             default:
-                println("default")
+                print("default")
                 break;
                 
             }
@@ -175,12 +175,12 @@ class ViewController: UIViewController, SKProductsRequestDelegate, SKPaymentTran
     }
     
     func finishTransaction(trans:SKPaymentTransaction){
-        println("finish trans")
+        print("finish trans")
         SKPaymentQueue.defaultQueue().finishTransaction(trans)
     }
     
-    func paymentQueue(queue: SKPaymentQueue!, removedTransactions transactions: [AnyObject]!){
-        println("remove trans");
+    func paymentQueue(queue: SKPaymentQueue, removedTransactions transactions: [SKPaymentTransaction]){
+        print("remove trans");
     }
     
     func doUnlockFeatures(){

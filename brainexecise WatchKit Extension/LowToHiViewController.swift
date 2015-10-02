@@ -127,7 +127,7 @@ class LowToHiViewController: WKInterfaceController {
     func doNextStep(){
         if !self.isGameOver {
             gameLabel.setText("")
-            clearButtons(alpha: 1.0)
+            clearButtons(1.0)
             nextQuestion(self.step)
         }
         else {
@@ -302,7 +302,7 @@ class LowToHiViewController: WKInterfaceController {
             for index in 1...step {
                 infos.append(tempShuffle[index-1])
             }
-            infos = infos.sorted(<)
+            infos = infos.sort(<)
         }
         
         clearButtons()
@@ -590,7 +590,7 @@ class LowToHiViewController: WKInterfaceController {
     }
     
     func shuffle<C: MutableCollectionType where C.Index == Int>(var list: C) -> C {
-        let c = count(list)
+        let c = list.count
         for i in 0..<(c - 1) {
             let j = Int(arc4random_uniform(UInt32(c - i))) + i
             swap(&list[i], &list[j])

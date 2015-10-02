@@ -20,11 +20,11 @@ class StatViewController: WKInterfaceController {
         
         let userSetting: NSUserDefaults! = NSUserDefaults(suiteName: "group.brainexecise")
         
-        var hiscore = userSetting.integerForKey("hiscore") as Int
-        var todayScore = userSetting.integerForKey("todayscore") as Int
-        var progress = userSetting.integerForKey("rankprogress") as Int
-        var progressMax = userSetting.integerForKey("maxprogress") as Int
-        var rank = userSetting.objectForKey("rank") as? String
+        let hiscore = userSetting.integerForKey("hiscore") as Int
+        let todayScore = userSetting.integerForKey("todayscore") as Int
+        let progress = userSetting.integerForKey("rankprogress") as Int
+        let progressMax = userSetting.integerForKey("maxprogress") as Int
+        let rank = userSetting.objectForKey("rank") as? String
         
         rankLabel.setText(rank)
         if rank == "Expert" {

@@ -1,0 +1,25 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "711dd424-2425-477b-b0d5-54178aa59680++505",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+    "711dd424-2425-477b-b0d5-54178aa59680++505" : {
+
+    }
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "711dd424-2425-477b-b0d5-54178aa59680++505" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "79CCA949-C3DB-4A22-8C98-F4094266589C",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "711dd424-2425-477b-b0d5-54178aa59680++505" : "brainxesice"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "brainexecise",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "brainexecise.xcodeproj",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/subversion.assembla.com\/svn\/brainxesice",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Subversion",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "711dd424-2425-477b-b0d5-54178aa59680++505"
+    }
+  ]
+}

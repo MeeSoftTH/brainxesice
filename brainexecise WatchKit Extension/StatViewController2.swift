@@ -20,9 +20,9 @@ class StatViewController2 : WKInterfaceController {
         let userSetting: NSUserDefaults! = NSUserDefaults(suiteName: "group.brainexecise")
         
         
-        var gameScore1 = userSetting.integerForKey("hiscore1") as Int
-        var gameScore2 = userSetting.integerForKey("hiscore2") as Int
-        var gameScore3 = userSetting.integerForKey("hiscore3") as Int
+        let gameScore1 = userSetting.integerForKey("hiscore1") as Int
+        let gameScore2 = userSetting.integerForKey("hiscore2") as Int
+        let gameScore3 = userSetting.integerForKey("hiscore3") as Int
         
         speedCalScoreLabel.setText(String(format: "%d", gameScore1))
         trueOrFalseScoreLabel.setText(String(format: "%d", gameScore2))
