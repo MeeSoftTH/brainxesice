@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0416F2D51BC23D6400254264 /* brainexecise WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B2671C831B0AEA3600F5247C /* brainexecise WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		0416F2D81BC23D6400254264 /* brainexecise WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B2671C8F1B0AEA3700F5247C /* brainexecise WatchKit App.app */; };
 		B24362921B3A653600F08C37 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B24362911B3A653600F08C37 /* StoreKit.framework */; };
 		B2671C5D1B0AE91F00F5247C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2671C5C1B0AE91F00F5247C /* AppDelegate.swift */; };
 		B2671C621B0AE91F00F5247C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2671C611B0AE91F00F5247C /* ViewController.swift */; };
@@ -17,10 +19,8 @@
 		B2671C881B0AEA3600F5247C /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2671C871B0AEA3600F5247C /* InterfaceController.swift */; };
 		B2671C8A1B0AEA3600F5247C /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2671C891B0AEA3600F5247C /* GlanceController.swift */; };
 		B2671C8C1B0AEA3700F5247C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2671C8B1B0AEA3700F5247C /* Images.xcassets */; };
-		B2671C901B0AEA3700F5247C /* brainexecise WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = B2671C8F1B0AEA3700F5247C /* brainexecise WatchKit App.app */; };
 		B2671C981B0AEA3700F5247C /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2671C961B0AEA3700F5247C /* Interface.storyboard */; };
 		B2671C9A1B0AEA3700F5247C /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2671C991B0AEA3700F5247C /* Images.xcassets */; };
-		B2671C9D1B0AEA3700F5247C /* brainexecise WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B2671C831B0AEA3600F5247C /* brainexecise WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		B2671CA81B0B139500F5247C /* SelectLevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2671CA71B0B139500F5247C /* SelectLevelViewController.swift */; };
 		B2671CAA1B0B13CF00F5247C /* GameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2671CA91B0B13CF00F5247C /* GameViewController.swift */; };
 		B2671CAC1B0B141200F5247C /* SummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2671CAB1B0B141200F5247C /* SummaryViewController.swift */; };
@@ -39,6 +39,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		0416F2D31BC23D6400254264 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B2671C4F1B0AE91F00F5247C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B2671C821B0AEA3600F5247C;
+			remoteInfo = "brainexecise WatchKit Extension";
+		};
+		0416F2D61BC23D6400254264 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B2671C4F1B0AE91F00F5247C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B2671C8E1B0AEA3700F5247C;
+			remoteInfo = "brainexecise WatchKit App";
+		};
 		B2671C701B0AE91F00F5247C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B2671C4F1B0AE91F00F5247C /* Project object */;
@@ -46,32 +60,29 @@
 			remoteGlobalIDString = B2671C561B0AE91F00F5247C;
 			remoteInfo = brainexecise;
 		};
-		B2671C911B0AEA3700F5247C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B2671C4F1B0AE91F00F5247C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B2671C8E1B0AEA3700F5247C;
-			remoteInfo = "brainexecise WatchKit App";
-		};
-		B2671C9B1B0AEA3700F5247C /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B2671C4F1B0AE91F00F5247C /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B2671C821B0AEA3600F5247C;
-			remoteInfo = "brainexecise WatchKit Extension";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		B2671CA41B0AEA3700F5247C /* Embed App Extensions */ = {
+		0416F2D91BC23D6400254264 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				B2671C9D1B0AEA3700F5247C /* brainexecise WatchKit Extension.appex in Embed App Extensions */,
+				0416F2D51BC23D6400254264 /* brainexecise WatchKit Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0416F2DA1BC23D6400254264 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				0416F2D81BC23D6400254264 /* brainexecise WatchKit App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -267,12 +278,12 @@
 				B2671C531B0AE91F00F5247C /* Sources */,
 				B2671C541B0AE91F00F5247C /* Frameworks */,
 				B2671C551B0AE91F00F5247C /* Resources */,
-				B2671CA41B0AEA3700F5247C /* Embed App Extensions */,
+				0416F2DA1BC23D6400254264 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				B2671C9C1B0AEA3700F5247C /* PBXTargetDependency */,
+				0416F2D71BC23D6400254264 /* PBXTargetDependency */,
 			);
 			name = brainexecise;
 			productName = brainexecise;
@@ -308,27 +319,28 @@
 			buildRules = (
 			);
 			dependencies = (
-				B2671C921B0AEA3700F5247C /* PBXTargetDependency */,
 			);
 			name = "brainexecise WatchKit Extension";
 			productName = "brainexecise WatchKit Extension";
 			productReference = B2671C831B0AEA3600F5247C /* brainexecise WatchKit Extension.appex */;
-			productType = "com.apple.product-type.watchkit-extension";
+			productType = "com.apple.product-type.watchkit2-extension";
 		};
 		B2671C8E1B0AEA3700F5247C /* brainexecise WatchKit App */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = B2671C9E1B0AEA3700F5247C /* Build configuration list for PBXNativeTarget "brainexecise WatchKit App" */;
 			buildPhases = (
 				B2671C8D1B0AEA3700F5247C /* Resources */,
+				0416F2D91BC23D6400254264 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				0416F2D41BC23D6400254264 /* PBXTargetDependency */,
 			);
 			name = "brainexecise WatchKit App";
 			productName = "brainexecise WatchKit App";
 			productReference = B2671C8F1B0AEA3700F5247C /* brainexecise WatchKit App.app */;
-			productType = "com.apple.product-type.application.watchapp";
+			productType = "com.apple.product-type.application.watchapp2";
 		};
 /* End PBXNativeTarget section */
 
@@ -338,7 +350,7 @@
 			attributes = {
 				LastSwiftMigration = 0700;
 				LastSwiftUpdateCheck = 0700;
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = meesoft;
 				TargetAttributes = {
 					B2671C561B0AE91F00F5247C = {
@@ -412,7 +424,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B2671C901B0AEA3700F5247C /* brainexecise WatchKit App.app in Resources */,
 				B2671C8C1B0AEA3700F5247C /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -473,20 +484,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		0416F2D41BC23D6400254264 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B2671C821B0AEA3600F5247C /* brainexecise WatchKit Extension */;
+			targetProxy = 0416F2D31BC23D6400254264 /* PBXContainerItemProxy */;
+		};
+		0416F2D71BC23D6400254264 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B2671C8E1B0AEA3700F5247C /* brainexecise WatchKit App */;
+			targetProxy = 0416F2D61BC23D6400254264 /* PBXContainerItemProxy */;
+		};
 		B2671C711B0AE91F00F5247C /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = B2671C561B0AE91F00F5247C /* brainexecise */;
 			targetProxy = B2671C701B0AE91F00F5247C /* PBXContainerItemProxy */;
-		};
-		B2671C921B0AEA3700F5247C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B2671C8E1B0AEA3700F5247C /* brainexecise WatchKit App */;
-			targetProxy = B2671C911B0AEA3700F5247C /* PBXContainerItemProxy */;
-		};
-		B2671C9C1B0AEA3700F5247C /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = B2671C821B0AEA3600F5247C /* brainexecise WatchKit Extension */;
-			targetProxy = B2671C9B1B0AEA3700F5247C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -539,6 +550,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -554,7 +566,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -592,7 +604,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -608,6 +620,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = brainexecise/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "th.co.meesoft.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -622,6 +635,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = brainexecise/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "th.co.meesoft.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 			};
@@ -641,6 +655,7 @@
 				);
 				INFOPLIST_FILE = brainexeciseTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "th.co.meesoft.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/brainexecise.app/brainexecise";
 			};
@@ -656,6 +671,7 @@
 				);
 				INFOPLIST_FILE = brainexeciseTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "th.co.meesoft.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/brainexecise.app/brainexecise";
 			};
@@ -666,17 +682,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
 				);
 				IBSC_MODULE = brainexecise_WatchKit_Extension;
 				INFOPLIST_FILE = "brainexecise WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				PRODUCT_BUNDLE_IDENTIFIER = th.co.meesoft.brainexecise.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -685,13 +703,15 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				IBSC_MODULE = brainexecise_WatchKit_Extension;
 				INFOPLIST_FILE = "brainexecise WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				PRODUCT_BUNDLE_IDENTIFIER = th.co.meesoft.brainexecise.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};
@@ -707,9 +727,13 @@
 				);
 				INFOPLIST_FILE = "brainexecise WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = th.co.meesoft.brainexecise.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Debug;
 		};
@@ -721,9 +745,13 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "brainexecise WatchKit Extension/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = th.co.meesoft.brainexecise.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 2.0;
 			};
 			name = Release;
 		};

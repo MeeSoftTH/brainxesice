@@ -42,7 +42,7 @@ class ViewController: UIViewController, SKProductsRequestDelegate, SKPaymentTran
                 userSetting.setInteger(0, forKey: "rankprogress")
                 userSetting.setInteger(3, forKey: "maxprogress")
                 
-                userSetting.setBool(false, forKey: "practicemode")
+                userSetting.setBool(true, forKey: "practicemode")
                 
                 userSetting.setInteger(0, forKey: "dailyplay")
                 userSetting.setInteger(0, forKey: "game1play")
@@ -51,11 +51,11 @@ class ViewController: UIViewController, SKProductsRequestDelegate, SKPaymentTran
                 userSetting.setInteger(0, forKey: "game4play")
                 userSetting.setInteger(0, forKey: "game5play")
                 
-                userSetting.setBool(false, forKey: "game1unlock")
-                userSetting.setBool(false, forKey: "game2unlock")
-                userSetting.setBool(false, forKey: "game3unlock")
-                userSetting.setBool(false, forKey: "game4unlock")
-                userSetting.setBool(false, forKey: "game5unlock")
+                userSetting.setBool(true, forKey: "game1unlock")
+                userSetting.setBool(true, forKey: "game2unlock")
+                userSetting.setBool(true, forKey: "game3unlock")
+                userSetting.setBool(true, forKey: "game4unlock")
+                userSetting.setBool(true, forKey: "game5unlock")
                 
                 userSetting.setInteger(10, forKey: "hiscore")
                 userSetting.setInteger(1, forKey: "topgame")

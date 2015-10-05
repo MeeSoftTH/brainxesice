@@ -593,8 +593,9 @@ class LowToHiViewController: WKInterfaceController {
         let c = list.count
         for i in 0..<(c - 1) {
             let j = Int(arc4random_uniform(UInt32(c - i))) + i
-            swap(&list[i], &list[j])
+            //swap(&list[i], &list[j])
         }
+        
         return list
     }
 

@@ -228,7 +228,7 @@ class InterfaceController: WKInterfaceController, ModalGameOverDelegate {
             var names: [String] = []
             var contexts: [AnyObject] = [["segue": "pagebased", "score": gameScore.score, "star": gameScore.star, "hiscorebreak" : hiscoreBreak, "msg" : msg, "sender": self]]
             if self.currentLevel == 1 {
-                let progress = userSetting.integerForKey("rankprogress")
+                //let progress = userSetting.integerForKey("rankprogress")
                 
                 if isLevelUp {
                     names = ["DailySummary", "BeginnerProgress", "ProProgress"]
