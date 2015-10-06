@@ -56,7 +56,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="967" y="88"/>
+            <point key="canvasLocation" x="1061" y="88"/>
         </scene>
         <!--Interface Controller-->
         <scene sceneID="aou-V4-d1y">
@@ -589,7 +589,7 @@
                     </connections>
                 </controller>
             </objects>
-            <point key="canvasLocation" x="920" y="-125"/>
+            <point key="canvasLocation" x="1014" y="-125"/>
         </scene>
         <!--Summary-->
         <scene sceneID="zkZ-jJ-qI3">
@@ -731,7 +731,7 @@
                     </connections>
                 </glanceController>
             </objects>
-            <point key="canvasLocation" x="292" y="354"/>
+            <point key="canvasLocation" x="298" y="398"/>
         </scene>
     </scenes>
     <color key="tintColor" red="0.60000002379999995" green="0.40000000600000002" blue="0.20000000300000001" alpha="1" colorSpace="calibratedRGB"/>
