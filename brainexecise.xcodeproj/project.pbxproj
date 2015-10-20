@@ -9,6 +9,15 @@
 /* Begin PBXBuildFile section */
 		0416F2D51BC23D6400254264 /* brainexecise WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = B2671C831B0AEA3600F5247C /* brainexecise WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0416F2D81BC23D6400254264 /* brainexecise WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = B2671C8F1B0AEA3700F5247C /* brainexecise WatchKit App.app */; };
+		0464F1431BC776E000C32776 /* GamesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464F1421BC776E000C32776 /* GamesViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		0464F1451BC7784700C32776 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464F1441BC7784700C32776 /* Question.swift */; settings = {ASSET_TAGS = (); }; };
+		0464F1471BC7786500C32776 /* GameSetting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464F1461BC7786500C32776 /* GameSetting.swift */; settings = {ASSET_TAGS = (); }; };
+		0464F1491BC7788E00C32776 /* GameSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0464F1481BC7788E00C32776 /* GameSelectionViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		04E71E9D1BD62CC9007AAA81 /* SelectLevelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E71E9C1BD62CC9007AAA81 /* SelectLevelViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		04E71E9F1BD646DE007AAA81 /* GmaeScore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E71E9E1BD646DE007AAA81 /* GmaeScore.swift */; settings = {ASSET_TAGS = (); }; };
+		04E71EA11BD647C0007AAA81 /* BeginnerProgressViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E71EA01BD647C0007AAA81 /* BeginnerProgressViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		04E71EA31BD6482D007AAA81 /* DailySummaryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E71EA21BD6482D007AAA81 /* DailySummaryViewController.swift */; settings = {ASSET_TAGS = (); }; };
+		04E71EA51BD64CA8007AAA81 /* LowToHiViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 04E71EA41BD64CA8007AAA81 /* LowToHiViewController.swift */; settings = {ASSET_TAGS = (); }; };
 		B24362921B3A653600F08C37 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B24362911B3A653600F08C37 /* StoreKit.framework */; };
 		B2671C5D1B0AE91F00F5247C /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2671C5C1B0AE91F00F5247C /* AppDelegate.swift */; };
 		B2671C621B0AE91F00F5247C /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2671C611B0AE91F00F5247C /* ViewController.swift */; };
@@ -88,6 +97,15 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0464F1421BC776E000C32776 /* GamesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GamesViewController.swift; sourceTree = "<group>"; };
+		0464F1441BC7784700C32776 /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
+		0464F1461BC7786500C32776 /* GameSetting.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSetting.swift; sourceTree = "<group>"; };
+		0464F1481BC7788E00C32776 /* GameSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSelectionViewController.swift; sourceTree = "<group>"; };
+		04E71E9C1BD62CC9007AAA81 /* SelectLevelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectLevelViewController.swift; sourceTree = "<group>"; };
+		04E71E9E1BD646DE007AAA81 /* GmaeScore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GmaeScore.swift; sourceTree = "<group>"; };
+		04E71EA01BD647C0007AAA81 /* BeginnerProgressViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BeginnerProgressViewController.swift; sourceTree = "<group>"; };
+		04E71EA21BD6482D007AAA81 /* DailySummaryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DailySummaryViewController.swift; sourceTree = "<group>"; };
+		04E71EA41BD64CA8007AAA81 /* LowToHiViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LowToHiViewController.swift; sourceTree = "<group>"; };
 		B24362911B3A653600F08C37 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		B2671C571B0AE91F00F5247C /* brainexecise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = brainexecise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2671C5B1B0AE91F00F5247C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -181,10 +199,19 @@
 			children = (
 				B2D5A6741B0EED570056F1F7 /* brainexecise.entitlements */,
 				B2671C5C1B0AE91F00F5247C /* AppDelegate.swift */,
+				04E71EA01BD647C0007AAA81 /* BeginnerProgressViewController.swift */,
+				04E71EA21BD6482D007AAA81 /* DailySummaryViewController.swift */,
+				0464F1481BC7788E00C32776 /* GameSelectionViewController.swift */,
+				0464F1461BC7786500C32776 /* GameSetting.swift */,
+				0464F1421BC776E000C32776 /* GamesViewController.swift */,
+				04E71E9E1BD646DE007AAA81 /* GmaeScore.swift */,
+				04E71EA41BD64CA8007AAA81 /* LowToHiViewController.swift */,
+				0464F1441BC7784700C32776 /* Question.swift */,
+				04E71E9C1BD62CC9007AAA81 /* SelectLevelViewController.swift */,
 				B2671C611B0AE91F00F5247C /* ViewController.swift */,
-				B2671C631B0AE91F00F5247C /* Main.storyboard */,
 				B2671C661B0AE91F00F5247C /* Images.xcassets */,
 				B2671C681B0AE91F00F5247C /* LaunchScreen.xib */,
+				B2671C631B0AE91F00F5247C /* Main.storyboard */,
 				B2671C5A1B0AE91F00F5247C /* Supporting Files */,
 			);
 			path = brainexecise;
@@ -218,25 +245,25 @@
 		B2671C841B0AEA3600F5247C /* brainexecise WatchKit Extension */ = {
 			isa = PBXGroup;
 			children = (
-				B29CF5E31B21939600263D53 /* Question.swift */,
 				B2D5A64B1B0EE1510056F1F7 /* brainexecise WatchKit Extension.entitlements */,
-				B2671C871B0AEA3600F5247C /* InterfaceController.swift */,
-				B2671C891B0AEA3600F5247C /* GlanceController.swift */,
-				B2671C8B1B0AEA3700F5247C /* Images.xcassets */,
-				B2671C851B0AEA3600F5247C /* Supporting Files */,
-				B2671CA71B0B139500F5247C /* SelectLevelViewController.swift */,
-				B2671CA91B0B13CF00F5247C /* GameViewController.swift */,
-				B2671CAB1B0B141200F5247C /* SummaryViewController.swift */,
 				B2671CAD1B0B145300F5247C /* BeginnerProgressViewController.swift */,
-				B2671CAF1B0B146700F5247C /* ProProgressViewController.swift */,
-				B2671CB31B0B16A500F5247C /* LowToHiViewController.swift */,
+				B26A58451B185B2E0057277B /* DailySummaryController.swift */,
+				B2671CB91B0B6E9600F5247C /* GameScore.swift */,
 				B2671CB51B0B178500F5247C /* GameSelectionViewController.swift */,
 				B2671CB71B0B281000F5247C /* GameSetting.swift */,
-				B2671CB91B0B6E9600F5247C /* GameScore.swift */,
+				B2671CA91B0B13CF00F5247C /* GameViewController.swift */,
+				B2671C891B0AEA3600F5247C /* GlanceController.swift */,
+				B2671C871B0AEA3600F5247C /* InterfaceController.swift */,
+				B2671CB31B0B16A500F5247C /* LowToHiViewController.swift */,
+				B2671CAF1B0B146700F5247C /* ProProgressViewController.swift */,
+				B29CF5E31B21939600263D53 /* Question.swift */,
+				B2671CA71B0B139500F5247C /* SelectLevelViewController.swift */,
 				B27095931B18121E003FC8E8 /* StatViewController.swift */,
-				B26A58451B185B2E0057277B /* DailySummaryController.swift */,
 				B2BDFA4C1B206EA700E84A2D /* StatViewController2.swift */,
 				B2BDFA4E1B20717500E84A2D /* StatViewController3.swift */,
+				B2671CAB1B0B141200F5247C /* SummaryViewController.swift */,
+				B2671C8B1B0AEA3700F5247C /* Images.xcassets */,
+				B2671C851B0AEA3600F5247C /* Supporting Files */,
 			);
 			path = "brainexecise WatchKit Extension";
 			sourceTree = "<group>";
@@ -445,8 +472,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				04E71EA31BD6482D007AAA81 /* DailySummaryViewController.swift in Sources */,
+				04E71E9F1BD646DE007AAA81 /* GmaeScore.swift in Sources */,
 				B2671C621B0AE91F00F5247C /* ViewController.swift in Sources */,
+				04E71EA11BD647C0007AAA81 /* BeginnerProgressViewController.swift in Sources */,
+				04E71E9D1BD62CC9007AAA81 /* SelectLevelViewController.swift in Sources */,
+				04E71EA51BD64CA8007AAA81 /* LowToHiViewController.swift in Sources */,
+				0464F1451BC7784700C32776 /* Question.swift in Sources */,
+				0464F1431BC776E000C32776 /* GamesViewController.swift in Sources */,
 				B2671C5D1B0AE91F00F5247C /* AppDelegate.swift in Sources */,
+				0464F1471BC7786500C32776 /* GameSetting.swift in Sources */,
+				0464F1491BC7788E00C32776 /* GameSelectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

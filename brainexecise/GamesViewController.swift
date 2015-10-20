@@ -1,34 +1,34 @@
- //
-//  GameViewController.swift
+//
+//  GamesViewController.swift
 //  brainexecise
 //
-//  Created by Petch Temeeyasen on 5/19/15.
-//  Copyright (c) 2015 meesoft. All rights reserved.
+//  Created by Pawarit Bunrith on 10/9/2558 BE.
+//  Copyright © 2558 meesoft. All rights reserved.
 //
 
-import WatchKit
+import UIKit
 
 protocol ModalGameOverDelegate {
     func gameOverDelegate(gameScore: GameScore!)
 }
 
-class GameViewController: WKInterfaceController, ModalBonusDelegate {
+class GamesViewController: UIViewController {
     
-    @IBOutlet weak var scoreLabel: WKInterfaceLabel!
-    @IBOutlet weak var incorrectLabel: WKInterfaceLabel!
-    @IBOutlet weak var statusLabel: WKInterfaceLabel!
-    @IBOutlet weak var gameNameLabel: WKInterfaceLabel!
-    @IBOutlet weak var questionLabel: WKInterfaceLabel!
+    @IBOutlet weak var scoreLabel: UILabel!
+    @IBOutlet weak var incorrectLabel: UILabel!
+    @IBOutlet weak var statusLabel: UILabel!
+    @IBOutlet weak var gameNameLabel: UILabel!
+    @IBOutlet weak var questionLabel: UILabel!
     
-    @IBOutlet weak var countdownLabel: WKInterfaceTimer!
-    @IBOutlet weak var answer1Button: WKInterfaceButton!
-    @IBOutlet weak var answer2Button: WKInterfaceButton!
+    @IBOutlet weak var countdownLabel: UILabel!
+    @IBOutlet weak var answer1Button: UIButton!
+    @IBOutlet weak var answer2Button: UIButton!
     
     var delegate: GameSelectionViewController?
-    var mainGameDelegate: InterfaceController?
+    var mainGameDelegate: ViewController?
     var defaultColor: UIColor = UIColor(red: 120.0/255.0, green:63.0/255.0, blue:4.0/255.0, alpha:1.0)
     var selectedColor: UIColor = UIColor.brownColor()
-
+    
     var gameSetting: GameSetting!
     var isPractice: Bool = false
     var trueSide: Int = 0
@@ -383,58 +383,17 @@ class GameViewController: WKInterfaceController, ModalBonusDelegate {
     
     let gameQuestions3Lv3: [Question] = [Question(text: "11 □ 6 = 5", choice1: "0", choice2: "+")]
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
         
-        if let setting = context as? GameSetting {
-            gameSetting = setting;
-            if setting.isPractice {
-                self.delegate = gameSetting.sender as? GameSelectionViewController
-            }
-                
-            else {
-                self.mainGameDelegate = gameSetting.sender as? InterfaceController
-            }
-            
-            switch(setting.gameMode){
-            case 0:
-                self.gameNameLabel.setText(String(format: "Speed Cal LV %d", setting.level))
-                break
-            case 1:
-                self.gameNameLabel.setText(String(format: "True or False LV %d", setting.level))
-                break
-            case 2:
-                self.gameNameLabel.setText(String(format: "Operators LV %d", setting.level))
-                break
-            default:
-                self.gameNameLabel.setText("")
-            }
-            
-            self.isPractice = setting.isPractice
-            
-            incorrectLabel.setAlpha(0.0)
-            statusLabel.setText("")
-            answer1Button.setBackgroundColor(defaultColor)
-            answer2Button.setBackgroundColor(defaultColor)
-            answer1Button.setTitle("")
-            answer2Button.setTitle("")
-            // set countdown label.
-            //var date = NSDate(timeIntervalSinceNow: self.duration) // 31)
-            //countdownLabel.setDate(date)
-
-            countDownTimer = NSTimer.scheduledTimerWithTimeInterval(1.0,
-                target: self,
-                selector: Selector("countdown"),
-                userInfo: nil,
-                repeats: true)
-        }
     }
     
-    override func willActivate() {
-        // This method is called when watch view controller is about to be visible to user
+    override func viewWillAppear(animated: Bool) {
         if self.isGameOver {
-            answer1Button.setEnabled(false)
-            answer2Button.setEnabled(false)
+            answer1Button.enabled = false
+            answer2Button.enabled = false
         }
         else {
             // Resume form dim.
@@ -444,23 +403,22 @@ class GameViewController: WKInterfaceController, ModalBonusDelegate {
                     selector: Selector("gameOver"),
                     userInfo: nil,
                     repeats: false)
-                
-                countdownLabel.setDate(NSDate(timeIntervalSinceNow: duration - elapsedTime))
-                countdownLabel.start()
-                startTime = NSDate()
+
+                countdownLabel.text = String(NSDate(timeIntervalSinceNow: duration - elapsedTime))
+                startTime = NSDate(timeIntervalSinceNow: duration - elapsedTime)
                 self.isPause = false
             }
         }
-        super.willActivate()
+
+        super.viewDidAppear(animated)
     }
     
-    override func didDeactivate() {
-        // This method is called when watch view controller is no longer visible
+    override func viewDidDisappear(animated: Bool) {
         if !self.isGameOver {
             let paused = NSDate()
             self.elapsedTime += paused.timeIntervalSinceDate(startTime)
             gameTimer.invalidate()
-            self.countdownLabel.stop()
+            //self.countdownLabel.stop()
             self.isPause = true
         }
         else {
@@ -476,8 +434,57 @@ class GameViewController: WKInterfaceController, ModalBonusDelegate {
                 gameTimer = nil
             }
         }
+
+        super.viewDidDisappear(animated)
+    }
+    
+    override func viewDidLoad() {
+    
+        if let setting: AnyObject = GameSetting.self {
+            
+            gameSetting = setting as? GameSetting
+            if (setting.isPractice != nil) {
+                self.delegate = gameSetting.sender as? GameSelectionViewController
+            }
+                
+            else {
+                self.mainGameDelegate = gameSetting.sender as? ViewController
+            }
+            
+            switch(gameSetting.gameMode){
+            case 0:
+                self.gameNameLabel.text = String(format: "Speed Cal LV %d", setting.level)
+                break
+            case 1:
+                self.gameNameLabel.text = String(format: "True or False LV %d", setting.level)
+                break
+            case 2:
+                self.gameNameLabel.text = String(format: "Operators LV %d", setting.level)
+                break
+            default:
+                self.gameNameLabel.text = ""
+            }
+            
+            self.isPractice = setting.isPractice
+            
+            incorrectLabel.alpha = 0.0
+            statusLabel.text = ""
+            answer1Button.backgroundColor = defaultColor
+            answer2Button.backgroundColor = defaultColor
+            answer1Button.setTitle("", forState: .Normal)
+            answer2Button.setTitle("", forState: .Normal)
+            // set countdown label.
+            //var date = NSDate(timeIntervalSinceNow: self.duration) // 31)
+            //countdownLabel.setDate(date)
+            
+            countDownTimer = NSTimer.scheduledTimerWithTimeInterval(1.0,
+                target: self,
+                selector: Selector("countdown"),
+                userInfo: nil,
+                repeats: true)
+        }
         
-        super.didDeactivate()
+        super.viewDidLoad()
     }
     
     @IBAction func answer1Click() {
@@ -504,29 +511,29 @@ class GameViewController: WKInterfaceController, ModalBonusDelegate {
                 for var index = 0; index < star; ++index {
                     str = str  + "★"
                 }
-                gameNameLabel.setText(str)
+                gameNameLabel.text = str
             }
             let plus = bonusGain ? gameSetting.level * 2 : gameSetting.level
-            statusLabel.setText(String(format: "+%d", plus)) //"+1")
+            statusLabel.text = String(format: "+%d", plus) //"+1")
             score += plus //score++
-            scoreLabel.setText(String(format: "Score: %d", score))
+            scoreLabel.text = String(format: "Score: %d", score)
             correctCount++;
         }
         else {
             self.bonusProgress = 0
-            incorrectLabel.setAlpha(1.0)
-            statusLabel.setTextColor(UIColor.redColor())
+            incorrectLabel.alpha = 1.0
+            statusLabel.textColor = UIColor.redColor()
             let minus = gameSetting.level
-            statusLabel.setText(String(format: "-%d", minus)) //"+1")
+            statusLabel.text = String(format: "-%d", minus) //"+1")
             //statusLabel.setText("-1")
             score -= minus
             if score < 0 {
                 score = 0
             }
-            scoreLabel.setText(String(format: "Score: %d", score))
+            scoreLabel.text = String(format: "Score: %d", score)
             incorrect++
-            incorrectLabel.setText(String(format: "X: %d", incorrect))
-
+            incorrectLabel.text = String(format: "X: %d", incorrect)
+            
         }
         NSTimer.scheduledTimerWithTimeInterval(0.5,
             target: self,
@@ -534,32 +541,32 @@ class GameViewController: WKInterfaceController, ModalBonusDelegate {
             userInfo: nil,
             repeats: false)
         
-        answer1Button.setEnabled(false)
-        answer2Button.setEnabled(false)
+        answer1Button.enabled = false
+        answer2Button.enabled = false
         if !isGameOver {
             getQuestion()
         }
     }
     
     func clearStat() {
-        statusLabel.setTextColor(UIColor.whiteColor())
-        statusLabel.setText("")
+        statusLabel.textColor = UIColor.whiteColor()
+        statusLabel.text = ""
     }
     
     func countdown() {
         if countDown == 0 {
             // invalidate and stop timer.
-            gameNameLabel.setText("") // ★★★
+            gameNameLabel.text = "" // ★★★
             countDownTimer.invalidate()
             countDownTimer = nil
             
             self.bonusProgress = 0
             self.correctCount = 0
-
+            
             self.startTime = NSDate()
-            let date = NSDate(timeIntervalSinceNow: self.duration)
-            countdownLabel.setDate(date)
-            countdownLabel.start()
+            //let date = NSDate(timeIntervalSinceNow: self.duration)
+            //countdownLabel.setDate(date)
+            //countdownLabel.start()
             
             gameTimer = NSTimer.scheduledTimerWithTimeInterval(self.duration,
                 target: self,
@@ -570,20 +577,20 @@ class GameViewController: WKInterfaceController, ModalBonusDelegate {
             getQuestion()
         }
         else {
-            questionLabel.setText(String(format:"%d", countDown))
+            questionLabel.text = String(format:"%d", countDown)
             countDown--
         }
     }
     
     func gameOver(){
         isGameOver = true
-        answer1Button.setEnabled(false)
-        answer2Button.setEnabled(false)
+        answer1Button.enabled = false
+        answer2Button.enabled = false
         
         if self.star >= 3 {
             self.bonusMode = 4
             self.isShowBonusStage = true
-            questionLabel.setText("★Bonus★")
+            questionLabel.text = "★Bonus★"
             NSTimer.scheduledTimerWithTimeInterval(3.0,
                 target: self,
                 selector: Selector("goToBonusStage"),
@@ -591,7 +598,7 @@ class GameViewController: WKInterfaceController, ModalBonusDelegate {
                 repeats: false)
         }
         else {
-            questionLabel.setText("Game Over")
+            questionLabel.text = "Game Over"
             
             NSTimer.scheduledTimerWithTimeInterval(3.0,
                 target: self,
@@ -602,16 +609,16 @@ class GameViewController: WKInterfaceController, ModalBonusDelegate {
     }
     
     func goToBonusStage(){
-        pushControllerWithName("Low2High", context: ["segue": "hierarchical", "level": self.gameSetting.level, "practice": false, "sender": self])
+        //pushControllerWithName("Low2High", context: ["segue": "hierarchical", "level": self.gameSetting.level, "practice": false, "sender": self])
     }
     
     func bonusEndDelegate(score: Int){
         self.isShowBonusStage = false
-        popController()
-        answer1Button.setEnabled(false)
-        answer2Button.setEnabled(false)
+        //popController()
+        answer1Button.enabled = false
+        answer2Button.enabled = false
         self.score = self.score + score
-        questionLabel.setText("Game Over")
+        questionLabel.text = "Game Over"
         
         NSTimer.scheduledTimerWithTimeInterval(3.0,
             target: self,
@@ -621,13 +628,13 @@ class GameViewController: WKInterfaceController, ModalBonusDelegate {
     }
     
     func goToSummaryPage(){
-        let scoreCard = GameScore(score : self.score, correct: self.correctCount, incorrect: self.incorrect, star: self.star, level : gameSetting.level, gameMode: gameSetting.gameMode, bonusMode: self.bonusMode)
+        //let scoreCard = GameScore(score : self.score, correct: self.correctCount, incorrect: self.incorrect, star: self.star, level : gameSetting.level, gameMode: gameSetting.gameMode, bonusMode: self.bonusMode)
         
         if gameSetting.isPractice {
-            self.delegate?.gameOverDelegate(scoreCard)
+            //self.delegate?.gameOverDelegate(scoreCard)
         }
         else {
-            self.mainGameDelegate?.gameOverDelegate(scoreCard)
+            //self.mainGameDelegate?.gameOverDelegate(scoreCard)
         }
         self.scoreReported = true
     }
@@ -696,15 +703,15 @@ class GameViewController: WKInterfaceController, ModalBonusDelegate {
         }
         
         if q != nil && !self.isGameOver {
-            questionLabel.setText(q?.text)
-            answer1Button.setTitle(button1Title)
-            answer2Button.setTitle(button2Title)
-            answer1Button.setEnabled(true)
-            answer2Button.setEnabled(true)
+            questionLabel.text = q?.text
+            answer1Button.setTitle(button1Title, forState: .Normal)
+            answer2Button.setTitle(button2Title, forState: .Normal)
+            answer1Button.enabled = false
+            answer2Button.enabled = false
         }
     }
     
     func randomNumberBetween(min: Int, max: Int) -> Int {
         return Int(arc4random_uniform(UInt32(max - min + 1))) + min
     }
-    }
+}
